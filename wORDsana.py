@@ -20,7 +20,6 @@ app = Flask(__name__)
 
 
 #-----------------------User Page------------------------------------
-
 # @app.route("/user_page")
 @app.route("/")
 def view_userpage():
