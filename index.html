@@ -1,4 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 <!-- swfobject is a commonly used library to embed Flash content -->
@@ -31,12 +31,21 @@
 </script>
 </head>
 
-
 <body onload="setupRecorder()">
-	<div id="wami" style="margin-left: 100px;"></div>
+
+	<div id="wami" style="margin-left: 100px;">
+
+		<div style="position: absolute; z-index: 99999;" id="wid2e0a37d9732">
+			<object type="application/x-shockwave-flash" data="Wami.swf" width="214" height="137" id="wid38a3b2e21fb" style="visibility: visible; border: 1px solid red;">
+				<param name="allowScriptAccess" value="always">
+				<param name="flashvars" value="visible=false&amp;loadedCallback=Wami._callbacks['wid4d4b47031f3']&amp;console=true">
+			</object>
+		</div>
+	</div>
+
 	<noscript>WAMI requires Javascript</noscript>
 
-	<div
+<!-- 	<div
 		style="position: absolute; left: 400px; top: 20px; font-family: arial, sans-serif; font-size: 82%">
 		Right-click to Download<br /> <br /> <a
 			href="https://wami-recorder.googlecode.com/hg/example/client/index.html">index.html</a><br />
@@ -48,6 +57,6 @@
 			href="https://wami-recorder.googlecode.com/hg/example/client/recorder.js">recorder.js</a><br />
 		<a
 			href="https://wami-recorder.googlecode.com/hg/example/client/gui.js">gui.js</a><br />
-	</div>
+	</div> -->
 </body>
 </html>

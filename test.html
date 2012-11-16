@@ -1,0 +1,50 @@
+<!doctype html>
+<html>
+<head>
+<!-- swfobject is a commonly used library to embed Flash content -->
+<script type="text/javascript"
+	src="https://ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js"></script>
+
+<!-- Setup the recorder interface -->
+<script type="text/javascript" src="recorder.js"></script>
+
+<!-- GUI code... take it or leave it -->
+<script type="text/javascript" src="gui.js"></script>
+
+<script>
+	function setupRecorder() {
+		Wami.setup({
+			id : "wami",
+			onReady : setupGUI
+		});
+	}
+
+	function setupGUI() {
+		var gui = new Wami.GUI({
+			id : "wami",
+			recordUrl : "https://wami-recorder.appspot.com/audio",
+			playUrl : "https://wami-recorder.appspot.com/audio"
+		});
+
+		gui.setPlayEnabled(false);
+	}
+</script>
+<!--<style type="text/css" media="screen">#wid1884f700571 {outline:none}</style>-->
+</head>
+
+
+<body onload="setupRecorder()">
+	<div onload="setupGUI">
+	
+<div id="wami" style="margin-left: 100px;">
+<div style="position: absolute;z-index: 99999;" id="wid2e0a37d9732">
+	<object type="application/x-shockwave-flash" data="http://50.17.203.222:8080/portal/content;jsessionid=1F8B09E98AEE35E19CC44F1AC361B122?path=/Wami.swf" width="214" height="137" id="wid38a3b2e21fb"  style="visibility: visible; border: 1px solid green;">
+		<param name="allowScriptAccess" value="true">
+		<param name="flashvars" value="true">
+	</object>
+</div>
+</div>
+	</div>
+</body>
+
+</html>
