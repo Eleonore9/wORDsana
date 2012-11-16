@@ -1,0 +1,105 @@
+.container{
+	border:2px solid grey;
+	border-radius: 10px 10px;
+	box-shadow: 5px 5px 15px 5px;
+	width: 350px;
+	margin-left: 670px;
+	margin-right: auto;
+	margin-top: 200px;
+	padding-left: 30px;
+	padding-right: 0px;
+	background-color: white;
+}
+
+.h3 {
+	font-weight: italic;
+}
+
+/*.text-info {
+
+	padding-top:20px;
+}*/
+
+.title_span {
+	/*border:1px solid red;*/
+	margin-left: auto;
+	margin-top: auto;
+	padding: 10px;
+	width: 200px;
+}
+	
+.tasklist {	
+	/*border:1px solid blue;*/
+	margin-left: 300px;
+	margin-top: 50px;
+	padding: 10px;
+	width: 500px;
+}
+
+.background_body {
+	border:1px solid green;
+	background-color: #CBD7ED;
+	height: 400px
+}
+
+.form_login {
+	border:2px solid green;
+	border-radius: 10px 10px;
+	width: 300px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 100px;
+	padding-right: 30px;
+	padding-left: 50px;
+	padding-top: 20px;
+	padding-bottom: 20px;	
+	height: 150px;
+}
+
+.btn_login {
+	margin-left: 615px;
+	margin-right: auto;
+	margin-top: 100px;
+}
+
+.form_task {
+	border:2px solid green;
+	border-radius: 10px 10px;
+	width: 300px;
+	margin-left: 300px;
+	margin-right: auto;
+	margin-top: 50px;
+	padding-right: 30px;
+	padding-left: 10px;	
+	padding-top: 20px;
+	padding-bottom: 20px;
+	height: 100px;
+}
+
+.btn_logout {
+	margin-left: 220px;
+	margin-right: auto;
+	
+}
+
+form label {
+	padding-left: 60px;
+	padding-bottom: 5px;
+	font-weight: bold;
+	font-size: 1.5em;
+	margin-bottom: 5px;
+}
+
+ul {
+	font-size:1.2em;
+}
+
+.tasklist input {
+	margin-right:10px;
+}
+
+.btn {
+	margin-top:100px;
+	margin-left:200px;
+
+}
