@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+
+{% block body %}
+
+<h2>User 's collection of words</h2>
+
+
+<h3> Record yourself, here: </h3>
+
+<!-- <div onload="setupRecorder()"> -->
+<div onload="setupGUI">
+	<div class="row">
+	<div id="wami" class="span4" style="margin-left: 200px;">
+	<div style="position: absolute;z-index: 99999;" id="wid2e0a37d9732">
+		<object type="application/x-shockwave-flash" data="static/Wami.swf" width="214" height="137" id="wid38a3b2e21fb"  style="visibility: visible; border: 1px solid green;">
+			<param name="allowScriptAccess" value="true">
+			<param name="flashvars" value="true">
+		</object>
+	</div>
+	</div>
+
+	<form class="span5" method="POST">
+		<input type="text" name="textarea" placeholder="write something here"></input>
+		<input type="submit" value="Add to collection"></input>
+	</form>
+	</div>
+<h3 style="margin-top: 80px;"> Listen to your recorded words & sounds, here:</h3>
+
+</div>
+<!-- </div> -->
+
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+{% block body %}
+
+<h2>Get started with wORDsana =)</h2>
+<h3>Sign up NOW!</h3>
+
+<div class="form_login">
+        <form method="POST" action="{{ url_for("new_user")}}">
+        	<label> email </label>
+        	<input type="text" name="email" placeholder="enter your email here"></input>
+        	<label> password </label>
+        	<input type="password" name="password" placeholder="enter your password here"></input>
+        	<input type="submit" value="Sign Up"></input>
+        </form>
+</div>
+
+{% endblock %}
