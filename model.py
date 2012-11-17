@@ -39,10 +39,9 @@ class User(Base):
     # TABLE_NAME = "users"
 	#--------class methods--------------------
 	@classmethod
-	def authenticate(cls, db, email, password):
-		auth = session.query(User).filter_by(email='email', password='password').one()
-		if auth:
-			return cls(*auth)
+	def authenticate(cls, email, password):
+		auth = session.query(User).filter_by(email=email, password=password).first()
+		return auth
 
 	@classmethod
 	def new(cls, db, email, password, username):

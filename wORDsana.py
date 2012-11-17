@@ -2,7 +2,7 @@
 # -*- coding=UTF-8 -*-
 import os, sys
 from flask import Flask, render_template, redirect, request, url_for, session
-
+import model
 
 
 app = Flask(__name__)
@@ -17,9 +17,18 @@ def index():
 def sign_up():
     return render_template("signup.html")
 
-@app.route("/authenticate")
+@app.route("/authenticate", methods=['POST'])
 def authenticate():
-	pass
+	email = request.form['email']
+	password = request.form['password']
+	print email
+	print password
+	user_auth = model.User.authenticate(email, password)
+	if user_auth != None:
+		return redirect(url_for("view_userpage"))
+	else:
+		return redirect(url_for("index"))
+
 
 @app.route("/new_user")
 def new_user():
@@ -28,7 +37,7 @@ def new_user():
 #-----------------------User Page------------------------------------
 @app.route("/user_page")
 def view_userpage():
-    return render_template("test.html")
+    return render_template("user_page.html")
 
 
 
