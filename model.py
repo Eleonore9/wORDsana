@@ -13,14 +13,17 @@ Base.query = session.query_property()
 
 
 #-------------------------------------------General functions:
-def new_thing(db, table, columns, values):
+def new_thing(table, columns, values):
 	"""insert a new user, post, comment into the database"""
 	pass
-	# thing = 
+	#insert in a specific table the values given taking into account the 
+	#columns order
+	
+	# thing = table(values)
 	# session.add(thing)
 	# session.commit()
 
-def get_thing(db, id):
+def get_thing(id):
 	"""retrieve a user, post, comment with its id"""
 	pass
 
@@ -34,6 +37,11 @@ class User(Base):
 	password = Column(String(10), nullable=False)
 	username = Column(String(20), nullable=True)
 
+	def __init__(self, email, password, username):
+		self.email = email
+		self.password = password
+		self.username = username
+
 	#--------class attributes-----------------
     # COLS = ["id", "email", "password", "username"]
     # TABLE_NAME = "users"
@@ -44,20 +52,28 @@ class User(Base):
 		return auth
 
 	@classmethod
-	def new(cls, db, email, password, username):
-		user = User()
-		return new_thing()
+	def new(cls, email, password, username):
+		user = User(email, password, username)
+		session.add(user)
+		session.commit()
+		return user
 
 	@classmethod
-	def get(cls, db, id):
+	def get(cls, id):
 		pass
 		return get_thing()
 
+	@classmethod
+	def check_name(cls, username):
+		"""checks if a username is already used by another user."""
+		check = session.query(User).filter_by(username=username).all()
+		return check
+
 	#--------instance methods------------------
-	def get_id(self, db, email, password, username):
+	def get_id(self, email, password, username):
 		pass
 
-	def get_posts(self, db, id):
+	def get_posts(self, id):
 		pass
 	
 #-------------------Post Class----------------------------------
@@ -78,17 +94,17 @@ class Post(Base):
     # TABLE_NAME = "posts"
 	#--------class methods--------------------
 	@classmethod
-	def new(cls, db, email, password, username):
+	def new(cls, email, password, username):
 		pass
 		return new_thing()
 
 	@classmethod
-	def get(cls, db, id):
+	def get(cls, id):
 		pass
 		return get_thing()
 
 	#--------instance methods------------------
-	def get_id(self, db, sound, text, posted_at, user_id):
+	def get_id(self, sound, text, posted_at, user_id):
 		pass
 
 #-------------------Comment Class----------------------------------
@@ -113,17 +129,17 @@ class Comment(Base):
     # TABLE_NAME = "comments"
 	#--------class methods--------------------
 	@classmethod
-	def new(cls, db, email, password, username):
+	def new(cls, email, password, username):
 		pass
 		return new_thing()
 
 	@classmethod
-	def get(cls, db, id):
+	def get(cls, id):
 		pass
 		return get_thing()
 
 	#--------instance methods------------------
-	def get_id(self, db, sound, text, posted_at, user_id, post_id):
+	def get_id(self, sound, text, posted_at, user_id, post_id):
 		pass
 
 #End of Classes definition

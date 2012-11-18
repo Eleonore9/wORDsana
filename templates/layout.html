@@ -11,6 +11,16 @@
 		<link rel="stylesheet" href="static/css/project.css"
 		type="text/css">
 
+		{% with messages = get_flashed_messages() %}
+  			{% if messages %}
+    			<ul class=flashes>
+    			{% for message in messages %}
+     				 <li>{{ message }}</li>
+    			{% endfor %}
+   				 </ul>
+  			{% endif %}
+		{% endwith %}
+
 	<!-- Code needed to embed the recorder -->
 
 		<!-- swfobject is a commonly used library to embed Flash content -->
