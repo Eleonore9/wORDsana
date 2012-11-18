@@ -66,12 +66,14 @@ class User(Base):
 	@classmethod
 	def check_name(cls, username):
 		"""checks if a username is already used by another user."""
-		check = session.query(User).filter_by(username=username).all()
+		check = session.query(User).filter_by(username=username).first()
 		return check
 
 	#--------instance methods------------------
-	def get_id(self, email, password, username):
-		pass
+	# def get_id(self, email, password, username):
+	# 	"""retrieves the id of a particular user"""
+	# 	user_id = session.query(User).filter_by(email=email, password=password, username=username)
+	# 	return user_id
 
 	def get_posts(self, id):
 		pass
