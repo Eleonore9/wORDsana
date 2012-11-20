@@ -1,10 +1,25 @@
 {% extends "layout.html" %}
 {% block body %}
+        <div class="navbar-fixed-top">
+                <ul class="nav">
+                       <li class="active">
+                                <div class="logo">
+                                <img src="static/img/logo2.png">
+                                </div>
+                        </li>
+                        <li>
+                                <div class="nav_right">
+                                <a href="/about">About</a></li>
+                                </div>
+                        </li>  
+                </ul>
+        </div>
 
-<h2>Get started with wORDsana =)</h2>
+<div class="background">
+<h2>Get started with wORDsana!</h2>
 <h3>Sign up NOW!</h3>
 
-<div class="form_login">
+<div class="form_signup">
         <form method="POST" action="{{ url_for("new_user")}}">
         	<label> username </label>
         	<input type="text" name="username" placeholder="Choose a username"></input>
@@ -15,7 +30,7 @@
         	<input type="password" name="password2" placeholder="Please, retype your password"></input>
         	<input type="submit" value="Sign Up"></input>
         </form>
-
+</div>
 </div>
 
 {% endblock %}

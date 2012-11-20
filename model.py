@@ -77,6 +77,16 @@ class User(Base):
 
 	def get_posts(self, id):
 		pass
+
+	# def get_username(self, user_id):
+	# 	row = session.query(User).filter_by(id=user_id).first()
+	# 	username = row[3]
+	# 	return username
+
+	# def get_email(self, user_id):
+	# 	row = session.query(User).filter_by(id=user_id).first()
+	# 	email = row[1]
+	# 	return email
 	
 #-------------------Post Class----------------------------------
 class Post(Base):
@@ -108,6 +118,7 @@ class Post(Base):
 	#--------instance methods------------------
 	def get_id(self, sound, text, posted_at, user_id):
 		pass
+
 
 #-------------------Comment Class----------------------------------
 class Comment(Base):

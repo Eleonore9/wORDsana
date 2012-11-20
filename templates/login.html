@@ -1,8 +1,22 @@
 {% extends "layout.html" %}
 {% block body %}
 
-
-<h1>Willkommen, Bienvenue, Welcome!</h1>
+	<div class="navbar-fixed-top">
+		<ul class="nav">
+			<li class="active">
+				<div class="logo">
+					<img src="static/img/logo2.png">
+				</div>
+			</li>
+			<li>
+				<div class="nav_right">
+				<a href="/about">About</a></li>
+				</div>
+		</ul>
+	</div>
+<div class="background">
+	<!-- <div class="body_page">  -->
+<h1>Willkommen, Bienvenue, Welcome!</h1>  
 
 <div class="form_login">
         <form method="POST" action="{{ url_for("authenticate")}} ">
@@ -14,6 +28,9 @@
         </form>
 </div>
 
-<a class="btn btn-info" href="/sign_up"> Sign Up </a>
-
+<div class="signup_btn">
+	<a class="btn btn-large btn-inverse" href="/sign_up"> Sign Up </a>
+</div>
+	<!-- </div> -->
+</div>
 {% endblock %}

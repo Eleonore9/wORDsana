@@ -28,24 +28,25 @@
 		src="https://ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js"></script>
 
 	<!-- Setup the recorder interface -->
-	<script type="text/javascript" src="static/recorder.js"></script>
+	<script type="text/javascript" src="/static/recorder.js"></script>
 
 	<!-- GUI code... take it or leave it -->
-	<script type="text/javascript" src="static/gui.js"></script>
+	<script type="text/javascript" src="/static/gui.js"></script>
 
 	<script>
 		function setupRecorder() {
 			Wami.setup({
 				id : "wami",
-				onReady : setupGUI
+				onReady : setupGUI,
+				swfUrl: "/static/Wami.swf"
 			});
 		}
 
 		function setupGUI() {
 			var gui = new Wami.GUI({
 				id : "wami",
-				recordUrl : "https://wami-recorder.appspot.com/audio",
-				playUrl : "https://wami-recorder.appspot.com/audio"
+				recordUrl : "http://127.0.0.1:5000/record",
+				playUrl : "https://127.0.0.1:5000/get_audio"
 			});
 
 			gui.setPlayEnabled(false);
@@ -54,8 +55,8 @@
 	</head>
 
 	<body onload="setupRecorder()">
-		<!-- <div class="container"> -->
+		<div class="container">
 		{% block body %}{% endblock %}
-		<!-- </div> -->
+		</div>
 	</body>
 </html>

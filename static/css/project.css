@@ -1,18 +1,67 @@
-.container{
-	border:2px solid grey;
-	border-radius: 10px 10px;
-	box-shadow: 5px 5px 15px 5px;
-	width: 350px;
-	margin-left: 670px;
-	margin-right: auto;
-	margin-top: 200px;
-	padding-left: 30px;
-	padding-right: 0px;
-	background-color: white;
+
+h1 {
+	
+	/*margin-left:500px;*/
+	position:relative;
+	margin-top:70px;
+	/*border:1px solid green;*/
+	text-align:center;
+	padding:10px;
 }
 
-.h3 {
-	font-weight: italic;
+h2 {
+	margin-left:50px;
+	margin-top:70px;
+	padding:5px;
+}
+
+h3 {
+	margin-left:auto;
+	margin-top:auto;
+	text-align:center;
+}
+
+.background {
+	/*border:1px solid grey;*/
+	background-image: url(/static/img/nasty_fabric.png);
+	position:relative;
+	height:500px;
+}
+
+.container {
+	width:auto;
+	height:auto;
+}
+
+.navbar-fixed-top {
+	/*position: floating;*/
+	border:1px solid grey;
+	height:70px;
+	background-color:#80a0b7;
+}
+
+/*.body_page {
+	border:1px solid green;
+}*/
+
+.logo {
+	margin-top:5px;
+	margin-left:10px;
+	height:50px;
+	width:70px;
+}
+
+.navbar-fixed-top .nav_right {
+	text-align:right;
+	margin-top: auto;
+	margin-right: 40px;
+	
+}
+
+.btn_logout {
+	
+	border:1px solid red;
+
 }
 
 /*.text-info {
@@ -36,14 +85,10 @@
 	width: 500px;
 }
 
-.background_body {
-	border:1px solid green;
-	background-color: #CBD7ED;
-	height: 400px
-}
-
 .form_login {
-	border:2px solid green;
+
+	border:1px solid grey;
+	box-shadow: 5px 5px 15px 5px;
 	border-radius: 10px 10px;
 	width: 300px;
 	margin-left: auto;
@@ -54,32 +99,37 @@
 	padding-top: 20px;
 	padding-bottom: 20px;	
 	height: 150px;
+	background-color: white;
 }
 
-.btn_login {
-	margin-left: 615px;
-	margin-right: auto;
-	margin-top: 100px;
+.signup_btn {
+	margin-left:700px;
+
 }
 
-.form_task {
-	border:2px solid green;
+
+.form_signup {
+	border:1px solid #80a0b7;
 	border-radius: 10px 10px;
+	box-shadow: 5px 5px 15px 5px;
 	width: 300px;
-	margin-left: 300px;
+	margin-left: auto;
 	margin-right: auto;
-	margin-top: 50px;
+	margin-top: auto;
 	padding-right: 30px;
 	padding-left: 10px;	
 	padding-top: 20px;
 	padding-bottom: 20px;
-	height: 100px;
+	height: 300px;
+	background-color: white;
 }
 
-.btn_logout {
-	margin-left: 220px;
-	margin-right: auto;
-	
+.recorder {
+	background-color: white;
+	margin-top: 30px;
+	padding: 20px;
+	height: 200px;
+	/*width: 800px;*/
 }
 
 form label {
