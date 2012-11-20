@@ -6,26 +6,29 @@ h1 {
 	margin-top:70px;
 	/*border:1px solid green;*/
 	text-align:center;
-	padding:10px;
+	padding-top:10px;
 }
 
 h2 {
 	margin-left:50px;
-	margin-top:70px;
-	padding:5px;
+	margin-top:40px;
+	padding-top:5px;
 }
 
 h3 {
 	margin-left:auto;
 	margin-top:auto;
 	text-align:center;
+	padding:10px;
 }
 
 .background {
-	/*border:1px solid grey;*/
+	border-bottom:1px solid grey;
 	background-image: url(/static/img/nasty_fabric.png);
 	position:relative;
 	height:500px;
+	padding:50px;
+	width: 100%;
 }
 
 .container {
@@ -34,17 +37,12 @@ h3 {
 }
 
 .navbar-fixed-top {
-	/*position: floating;*/
-	border:1px solid grey;
+	border:1px solid blue;
 	height:70px;
 	background-color:#80a0b7;
 }
 
-/*.body_page {
-	border:1px solid green;
-}*/
-
-.logo {
+.navbar-fixed-top .logo {
 	margin-top:5px;
 	margin-left:10px;
 	height:50px;
@@ -52,41 +50,30 @@ h3 {
 }
 
 .navbar-fixed-top .nav_right {
+	border:1px solid green;
 	text-align:right;
-	margin-top: auto;
 	margin-right: 40px;
-	
+	position:relative;
+
 }
 
-.btn_logout {
-	
+.navbar-fixed-top .btn_logout {
 	border:1px solid red;
-
 }
 
+.low_backgrd {
+	background-image: url(/static/img/cream_dust.png);
+	position:absolute;
+	margin-top: auto;
+	height:300px;
+	width: 100%;
+}
 /*.text-info {
 
 	padding-top:20px;
 }*/
 
-.title_span {
-	/*border:1px solid red;*/
-	margin-left: auto;
-	margin-top: auto;
-	padding: 10px;
-	width: 200px;
-}
-	
-.tasklist {	
-	/*border:1px solid blue;*/
-	margin-left: 300px;
-	margin-top: 50px;
-	padding: 10px;
-	width: 500px;
-}
-
 .form_login {
-
 	border:1px solid grey;
 	box-shadow: 5px 5px 15px 5px;
 	border-radius: 10px 10px;
@@ -101,12 +88,6 @@ h3 {
 	height: 150px;
 	background-color: white;
 }
-
-.signup_btn {
-	margin-left:700px;
-
-}
-
 
 .form_signup {
 	border:1px solid #80a0b7;
@@ -124,32 +105,63 @@ h3 {
 	background-color: white;
 }
 
-.recorder {
-	background-color: white;
-	margin-top: 30px;
-	padding: 20px;
-	height: 200px;
-	/*width: 800px;*/
+.form_signup .btn {
+	border: 1px solid red;
+	margin-left: 230px;
+	margin-top: 10px;
+}
+.form_signup input {
+	margin-left: 20px;
+}
+.form_signup label {
+	margin-left: 30px;
+	padding-bottom: 2px;
+	padding-top: 5px;
+	font-size: 1.1em;
+	margin-bottom: 7px;
 }
 
-form label {
-	padding-left: 60px;
+.form_text {
+	margin-top:50px;
+	margin-left:300px;
+	position:relative;
+}
+
+.signup_btn {
+	margin-left:700px;
+	margin-right:auto;
+	margin-top:auto;
+	padding-top:30px;
+	position:absolute;
+}
+
+/*.recorder {
+	border:1px solid blue;
+}*/
+
+.form_login label {
+	padding-left: 10px;
 	padding-bottom: 5px;
+	padding-top: 5px;
 	font-weight: bold;
-	font-size: 1.5em;
+	font-size: 1.1em;
 	margin-bottom: 5px;
 }
 
+.form_text label {
+	padding-left: 10px;
+	padding-bottom: 5px;
+	padding-top: 5px;
+	font-weight: bold;
+	font-size: 1.1em;
+	margin-bottom: 5px;
+}
 ul {
 	font-size:1.2em;
 }
 
-.tasklist input {
-	margin-right:10px;
-}
-
-.btn {
+/*.btn {
 	margin-top:100px;
 	margin-left:200px;
 
-}
+}*/

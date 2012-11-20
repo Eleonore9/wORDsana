@@ -3,14 +3,16 @@
         <div class="navbar-fixed-top">
                 <ul class="nav">
                        <li class="active">
-                                <div class="logo">
-                                <img src="static/img/logo2.png">
-                                </div>
+                            <div class="logo">
+                                <a  href="/">
+                                    <img src="static/img/logo2.png" alt="logo">
+                                </a>
+                            </div>
                         </li>
                         <li>
-                                <div class="nav_right">
-                                <a href="/about">About</a></li>
-                                </div>
+                            <div class="nav_right">
+                                <a href="/about">About</a>
+                            </div>
                         </li>  
                 </ul>
         </div>
@@ -21,16 +23,18 @@
 
 <div class="form_signup">
         <form method="POST" action="{{ url_for("new_user")}}">
-        	<label> username </label>
+        	<label><strong>username</strong></label>
         	<input type="text" name="username" placeholder="Choose a username"></input>
-        	<label> email </label>
+        	<label><strong>email</strong></label>
         	<input type="text" name="email" placeholder="Enter your email address"></input>
-        	<label> password </label> (5 characters or more)
+        	<label><strong>password</strong> (5 characters minimum)</label> 
         	<input type="password" name="password1" placeholder="Choose a password"></input>
         	<input type="password" name="password2" placeholder="Please, retype your password"></input>
-        	<input type="submit" value="Sign Up"></input>
+        	<input type="submit" value="Sign Up" class="btn"></input>
         </form>
 </div>
+</div>
+<div class="low_backgrd">
 </div>
 
 {% endblock %}

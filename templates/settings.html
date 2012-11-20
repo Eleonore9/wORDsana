@@ -5,7 +5,9 @@
 		<ul class="nav">
 			<li class="active">
 				<div class="logo">
-					<img src="static/img/logo2.png">
+					<a  href="/">
+					<img src="static/img/logo2.png" alt="logo">
+					</a>
 				</div>
 			</li>
 			<li>
@@ -18,11 +20,20 @@
 <div class="background">
 <h2>Your settings</h2>
 <ul>
-	<li> Username: {{username}} </li>
-	<li> Email: {{username}} </li>
-
-
+	<li> <strong>Username</strong>: {{username}} </li>
+	<li> <strong>Email</strong>: {{email}} </li>
 </ul>
+
+<form method="POST" action="/save_new_password">
+	<label>Change your password</label>
+	<input type="password" name="new_password" placeholder="type your new password"></input>
+	<input type="submit" value="Submit"></input>
+</form>
+
+</div>
+
+<div class="low_backgrd">
+<a href="/user_page1" class="btn btn-primary">Back to your page</a>
 </div>
 
 {% endblock %}

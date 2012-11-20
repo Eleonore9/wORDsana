@@ -60,8 +60,8 @@ class User(Base):
 
 	@classmethod
 	def get(cls, id):
-		pass
-		return get_thing()
+		user = session.query(User).get(id)
+		return user
 
 	@classmethod
 	def check_name(cls, username):
@@ -78,37 +78,40 @@ class User(Base):
 	def get_posts(self, id):
 		pass
 
-	# def get_username(self, user_id):
-	# 	row = session.query(User).filter_by(id=user_id).first()
-	# 	username = row[3]
-	# 	return username
-
-	# def get_email(self, user_id):
-	# 	row = session.query(User).filter_by(id=user_id).first()
-	# 	email = row[1]
-	# 	return email
+	def change_password(self, id, new_password):
+		user = session.query(User).get(id)
+		user.password = new_password
+		session.commit()
 	
 #-------------------Post Class----------------------------------
 class Post(Base):
 	__tablename__ = "posts"
 
 	id = Column(Integer, primary_key = True)
-	sound = Column(String(150), nullable=False)
-	text = Column(String(150), nullable=False)
+	sound = Column(String(150), nullable=True)
+	text = Column(String(150), nullable=True)
 	posted_at = Column(DateTime())
 	user_id = Column(Integer, ForeignKey('users.id'))
 
 	user = relationship("User",
 		backref=backref("posts", order_by=id))
 
+	def __init__(self, sound, text, posted_at, user_id):
+		self.sound = sound
+		self.text = text
+		self.posted_at = posted_at
+		self.user_id = user_id
 	#--------class attributes-----------------
     # COLS = ["id", "sound", "text", "posted_at", "user_id"]
     # TABLE_NAME = "posts"
 	#--------class methods--------------------
 	@classmethod
-	def new(cls, email, password, username):
-		pass
-		return new_thing()
+	def new(cls, sound, text, posted_at, user_id):
+		now = datetime.datetime.now()
+		post = Post(None, text, now, user_id)
+		session.add(post)
+		session.commit()
+		return post
 
 	@classmethod
 	def get(cls, id):
@@ -126,7 +129,7 @@ class Comment(Base):
 
 	id = Column(Integer, primary_key = True)
 	sound = Column(String(150), nullable=True)
-	text = Column(String(150), nullable=False)
+	text = Column(String(150), nullable=True)
 	posted_at = Column(DateTime())
 	user_id = Column(Integer, ForeignKey('users.id'))
 	post_id = Column(Integer, ForeignKey('posts.id'))
@@ -136,6 +139,13 @@ class Comment(Base):
 
 	post = relationship("Post",
 		backref=backref("comments", order_by=id))
+
+	def __init__(self, sound, text, posted_at, user_id, post_id):
+		self.sound = sound
+		self.text = text
+		self.posted_at = posted_at
+		self.user_id = user_id
+		self.post_id = post_id
 
 	#--------class attributes-----------------
     # COLS = ["id", "sound", "text", "posted_at", "user_id", "post_id"]

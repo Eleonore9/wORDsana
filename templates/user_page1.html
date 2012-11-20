@@ -2,24 +2,21 @@
 {% block body %}
 
 	<div class="navbar-fixed-top">
+		<a class="brand" href="/">
+			<div class="logo">
+                <img src="static/img/logo2.png" alt="logo">
+            </div>
+        </a>
 		<ul class="nav">
-            <li class="active">
-				<div class="logo">
-				<img src="static/img/logo2.png">
-				</div>
-			</li>
-			<li>
-                <div align="right">
-                <a href="/about">Settings</a></li>
-                </div>
-            </li> 
-			<li>
-				<div class="btn_logout">
-				<a href="/logout" class="btn btn-success">Log out</a>
-				</div>
+			<li class="active">
+                <li><div class="nav_right"><a href="/settings" align="right">Settings</a></div></li>	
+
+				<li><div class="btn_logout"><a href="/logout" class="btn btn-primary">Log out</a></div></li>
 			</li>
 		</ul>
 	</div>
+
+
 
 <div class="background">
 
@@ -29,15 +26,15 @@
 
 <h3> Step 1: write a post </h3>
 
-<div class="recorder">
-
-
-	<form class="span5" method="POST">
-		<input type="text" name="textarea" placeholder="write something here"></input>
-		<input type="submit" value="Add to collection"></input>
+<div class="form_text">
+	<form class="span5" method="POST" action="/user_page2">
+		<input type="textarea" name="text" placeholder="write something here"></input>
+		<input type="submit" value="Add to collection" class="btn btn-inverse"></input>
 	</form>
+</div>
+</div>
 
-
+<div class="low_backgrd">
 </div>
 <!-- </div> -->
 

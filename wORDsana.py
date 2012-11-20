@@ -4,6 +4,7 @@ import os, sys
 from flask import Flask, flash, render_template, redirect, request 
 from flask import url_for, session, send_from_directory
 import model
+import datetime
 
 app = Flask(__name__)
 app.secret_key = 'je_peux_pas_le_dire_c_est_un_secret'
@@ -63,24 +64,56 @@ def new_user():
 			return redirect(url_for("view_userpage"))
 		return redirect(url_for("index"))
 #-------------------- ---About---------------------------------------
-@app.route("/About")
-def settings():
+@app.route("/about")
+def about():
 	return render_template("about.html")
 #-----------------------User Page------------------------------------
-@app.route("/user_page")
+# @app.route("/user_page")
+# def view_userpage():
+# 	user_id = session.get("user_id", None)
+# 	if user_id:
+# 		return render_template("user_page.html")
+# 	else:
+# 		flash('Log in to access this page!')
+# 		return redirect(url_for("index"))
+
+@app.route("/user_page1")
 def view_userpage():
 	user_id = session.get("user_id", None)
 	if user_id:
-		return render_template("user_page.html")
+		return render_template("user_page1.html")
+	else:
+		flash('Log in to access this page!')
+		return redirect(url_for("index"))
+
+@app.route("/user_page2", methods=['POST'])
+def view_recorder():
+	user_id = session.get("user_id", None)
+	if user_id:
+		text = request.form['text']
+		posted_at = datetime.datetime.now()
+		model.Post.new(None, text, posted_at, user_id)
+		return render_template("user_page2.html")
 	else:
 		flash('Log in to access this page!')
 		return redirect(url_for("index"))
 
 @app.route("/settings")
 def settings():
-	user_name = model.User.username
-	user_email = model.User.email
+	user_id = session.get("user_id", None)
+	user = model.User.get(user_id)
+	user_name = user.username
+	user_email = user.email
 	return render_template("settings.html", username=user_name, email=user_email)
+
+@app.route("/save_new_password", methods=['POST'])
+def save_new_password():
+	new_password = request.form["new_password"]
+	user_id = session.get("user_id", None)
+	user = model.User.get(user_id)
+	model.User.change_password(user, user_id, new_password)
+	flash('Your new password has been saved!')
+	return redirect(url_for("settings"))
 
 #--------------------------Saving audio -----------------------------
 
