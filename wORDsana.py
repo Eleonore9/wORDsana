@@ -129,7 +129,7 @@ def crossdomain():
 
 @app.route("/record/<int:id>", methods=['POST'])
 def receive_audio(id):
-	new_file = open("/tmp/recording_%d.wav"%(id), "w")
+	new_file = open("/tmp/recording_%d.wav"%id, "w")
 	new_file.write(request.data)
 	new_file.close()
 	post = model.Post.get(id)
@@ -139,7 +139,7 @@ def receive_audio(id):
 
 @app.route("/get_audio/<int:id>")
 def get_audio(id):
-	return send_from_directory("/tmp/", id)
+	return send_from_directory("/tmp/", "recording_%d.wav"%id)
 
 #-------------------------Log out------------------------------------
 @app.route("/logout")
