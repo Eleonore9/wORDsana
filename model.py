@@ -115,13 +115,17 @@ class Post(Base):
 
 	@classmethod
 	def get(cls, id):
-		pass
-		return get_thing()
+		post = session.query(Post).get(id)
+		return post
 
 	#--------instance methods------------------
 	def get_id(self, sound, text, posted_at, user_id):
 		pass
 
+	def add_sound(self, post_id, sound_url):
+		post = session.query(Post).get(post_id)
+		post.sound = sound_url
+		session.commit()
 
 #-------------------Comment Class----------------------------------
 class Comment(Base):

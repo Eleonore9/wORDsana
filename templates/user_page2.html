@@ -1,5 +1,61 @@
-{% extends "layout.html" %}
-{% block body %}
+<!doctype html>
+
+<!-- layout template adapted from Tipsy and WAMI recorder index.html-->
+
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>wORDsana - your words, your way</title>
+		<link rel="stylesheet" href="static/css/bootstrap.css"
+		type="text/css">
+		<link rel="stylesheet" href="static/css/project.css"
+		type="text/css">
+
+		{% with messages = get_flashed_messages() %}
+  			{% if messages %}
+    			<ul class=flashes>
+    			{% for message in messages %}
+     				 <li>{{ message }}</li>
+    			{% endfor %}
+   				 </ul>
+  			{% endif %}
+		{% endwith %}
+
+	<!-- Code needed to embed the recorder -->
+
+		<!-- swfobject is a commonly used library to embed Flash content -->
+	<script type="text/javascript"
+		src="https://ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js"></script>
+
+	<!-- Setup the recorder interface -->
+	<script type="text/javascript" src="/static/recorder.js"></script>
+
+	<!-- GUI code... take it or leave it -->
+	<script type="text/javascript" src="/static/gui.js"></script>
+
+	<script>
+		function setupRecorder() {
+			Wami.setup({
+				id : "wami",
+				onReady : setupGUI,
+				swfUrl: "/static/Wami.swf"
+			});
+		}
+
+		function setupGUI() {
+			var gui = new Wami.GUI({
+				id : "wami",
+				recordUrl : "http://127.0.0.1:5000/record/{{id}}",
+				playUrl : "https://127.0.0.1:5000/get_audio/{{id}}"
+			});
+
+			gui.setPlayEnabled(false);
+		}
+	</script>
+	</head>
+
+	<body onload="setupRecorder()">
+		<div class="container">
 
 	<div class="navbar-fixed-top">
 		<a class="brand" href="/">
@@ -36,11 +92,16 @@
 		</object>
 	</div>#}
 	</div>
+	</div>
 </div>
-</div>
+<form method="POST" action="/record/{{id}}, id=id">
+	<input type="hidden" name="text" value="{{id}}"></input>
+</form>
 </div>
 
 <div class="low_backgrd">
 </div> 
 
-{% endblock %}
+		</div>
+	</body>
+</html>

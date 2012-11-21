@@ -92,8 +92,9 @@ def view_recorder():
 	if user_id:
 		text = request.form['text']
 		posted_at = datetime.datetime.now()
-		model.Post.new(None, text, posted_at, user_id)
-		return render_template("user_page2.html")
+		post = model.Post.new(None, text, posted_at, user_id)
+		post_id = post.id
+		return render_template("user_page2.html", id=post_id)
 	else:
 		flash('Log in to access this page!')
 		return redirect(url_for("index"))
@@ -131,6 +132,9 @@ def receive_audio(id):
 	new_file = open("/tmp/recording_%d.wav"%(id), "w")
 	new_file.write(request.data)
 	new_file.close()
+	post_id = request.form['id']
+	post = model.Post.get(post_id)
+	model.Post.add_sound(post, "/get_audio/%d"%(id))
 	return "audio file"
 
 @app.route("/get_audio/<int:id>")
