@@ -1,0 +1,46 @@
+{% extends "layout.html" %}
+{% block body %}
+
+	<div class="navbar-fixed-top">
+		<a class="brand" href="{{url_for("index")}}">
+			<div class="logo">
+                <img src="static/img/logo2.png" alt="logo">
+            </div>
+        </a>
+		<ul class="nav">
+			<li class="active">
+                <li><div class="nav_right"><a href="{{url_for("settings")}}" align="right">Settings</a></div></li>	
+
+				<li><div class="btn_logout"><a href="{{url_for("logout")}}" class="btn btn-primary">Log out</a></div></li>
+			</li>
+		</ul>
+	</div>
+
+
+
+<div class="background2">
+
+<h2>All sound collections on wORDsana</h2>
+
+
+
+
+</div> 
+<div class="low_backgrd">
+
+{% for row in rows %}
+
+<li> Sound #{{ row.id }} : {{ row.text }} - URL: {{ row.sound }}, posted on {{ row.posted_at}}
+	<object width="142" height="60" data="/get_audio/{{ row.id }}">
+	</object>
+</li>
+
+{% endfor %}
+
+	<div class="new_sound_btn">
+	<a class="btn btn-large btn-inverse" href="{{url_for("enter_text")}}"> Create a new sound! </a>
+	</div>
+</div>
+<!-- </div> -->
+
+{% endblock %}

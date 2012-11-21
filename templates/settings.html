@@ -5,14 +5,14 @@
 		<ul class="nav">
 			<li class="active">
 				<div class="logo">
-					<a  href="/">
+					<a  href="{{url_for("index")}}">
 					<img src="static/img/logo2.png" alt="logo">
 					</a>
 				</div>
 			</li>
 			<li>
 			<div class="nav_right">
-			<a href="/about">About</a>
+			<a href="{{url_for("about")}}">About</a>
 			</div>
 			</li>
 		</ul>
@@ -24,7 +24,7 @@
 	<li> <strong>Email</strong>: {{email}} </li>
 </ul>
 
-<form method="POST" action="/save_new_password">
+<form method="POST" action="{{url_for("save_new_password")}}">
 	<label>Change your password</label>
 	<input type="password" name="new_password" placeholder="type your new password"></input>
 	<input type="submit" value="Submit"></input>
@@ -33,7 +33,7 @@
 </div>
 
 <div class="low_backgrd">
-<a href="/user_page1" class="btn btn-primary">Back to your page</a>
+<a href="{{url_for("enter_text")}}" class="btn btn-primary">Back to your page</a>
 </div>
 
 {% endblock %}

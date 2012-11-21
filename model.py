@@ -42,9 +42,6 @@ class User(Base):
 		self.password = password
 		self.username = username
 
-	#--------class attributes-----------------
-    # COLS = ["id", "email", "password", "username"]
-    # TABLE_NAME = "users"
 	#--------class methods--------------------
 	@classmethod
 	def authenticate(cls, email, password):
@@ -75,8 +72,25 @@ class User(Base):
 	# 	user_id = session.query(User).filter_by(email=email, password=password, username=username)
 	# 	return user_id
 
-	def get_posts(self, id):
-		pass
+	def get_posts(self, user_id):
+		row_collection = session.query(Post).filter_by(user_id=user_id).all()
+		return row_collection
+
+	# def get_posts_ids(self, user_id):
+	# 	row_collection = session.query(Post).filter_by(user_id=user_id).all()
+	# 	sound_collection = []
+	# 	for row in row_collection:
+	# 		sound_id = row.id
+	# 		sound_collection.append(sound_id)
+	# 	return sound_collection
+
+	# def get_posts_texts(self, user_id):
+	# 	row_collection = session.query(Post).filter_by(user_id=user_id).all()
+	# 	sound_collection = []
+	# 	for row in row_collection:
+	# 		sound_id = row.text
+	# 		sound_collection.append(sound_id)
+	# 	return sound_collection
 
 	def change_password(self, id, new_password):
 		user = session.query(User).get(id)
@@ -101,9 +115,7 @@ class Post(Base):
 		self.text = text
 		self.posted_at = posted_at
 		self.user_id = user_id
-	#--------class attributes-----------------
-    # COLS = ["id", "sound", "text", "posted_at", "user_id"]
-    # TABLE_NAME = "posts"
+
 	#--------class methods--------------------
 	@classmethod
 	def new(cls, sound, text, posted_at, user_id):
@@ -151,9 +163,6 @@ class Comment(Base):
 		self.user_id = user_id
 		self.post_id = post_id
 
-	#--------class attributes-----------------
-    # COLS = ["id", "sound", "text", "posted_at", "user_id", "post_id"]
-    # TABLE_NAME = "comments"
 	#--------class methods--------------------
 	@classmethod
 	def new(cls, email, password, username):

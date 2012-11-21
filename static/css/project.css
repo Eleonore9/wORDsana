@@ -31,6 +31,15 @@ h3 {
 	width: 100%;
 }
 
+.background2 {
+	border-bottom:1px solid grey;
+	background-image: url(/static/img/nasty_fabric.png);
+	position:relative;
+	height:200px;
+	padding:50px;
+	width: 100%;
+}
+
 .container {
 	width:auto;
 	height:auto;
@@ -89,6 +98,10 @@ h3 {
 	background-color: white;
 }
 
+.form_login .btn {
+	/*border: 1px solid red;*/
+}
+
 .form_signup {
 	border:1px solid #80a0b7;
 	border-radius: 10px 10px;
@@ -106,7 +119,7 @@ h3 {
 }
 
 .form_signup .btn {
-	border: 1px solid red;
+	/*border: 1px solid red;*/
 	margin-left: 230px;
 	margin-top: 10px;
 }
@@ -128,7 +141,7 @@ h3 {
 }
 
 .signup_btn {
-	margin-left:700px;
+	margin-left:930px;
 	margin-right:auto;
 	margin-top:auto;
 	padding-top:30px;
