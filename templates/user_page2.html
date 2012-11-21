@@ -46,7 +46,7 @@
 			var gui = new Wami.GUI({
 				id : "wami",
 				recordUrl : "http://127.0.0.1:5000/record/{{id}}",
-				playUrl : "https://127.0.0.1:5000/get_audio/{{id}}"
+				playUrl : "http://127.0.0.1:5000/get_audio/{{id}}"
 			});
 
 			gui.setPlayEnabled(false);
@@ -85,18 +85,10 @@
 <div onload="setupGUI">
 	<div class="row">
 	<div id="wami" class="span4" style="margin-left: 200px;" >
-	{#<div style="position: absolute;z-index: 99999;" id="wid2e0a37d9732">
-		<object type="application/x-shockwave-flash" data="static/Wami.swf" width="214" height="137" id="wid38a3b2e21fb"  style="visibility: visible;">
-			<param name="allowScriptAccess" value="true">
-			<param name="flashvars" value="true">
-		</object>
-	</div>#}
+
 	</div>
 	</div>
 </div>
-<form method="POST" action="/record/{{id}}, id=id">
-	<input type="hidden" name="text" value="{{id}}"></input>
-</form>
 </div>
 
 <div class="low_backgrd">

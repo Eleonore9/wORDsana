@@ -132,9 +132,9 @@ def receive_audio(id):
 	new_file = open("/tmp/recording_%d.wav"%(id), "w")
 	new_file.write(request.data)
 	new_file.close()
-	post_id = request.form['id']
-	post = model.Post.get(post_id)
-	model.Post.add_sound(post, "/get_audio/%d"%(id))
+	post = model.Post.get(id)
+	post.sound = "/get_audio/%d"%(id)
+	model.session.commit()
 	return "audio file"
 
 @app.route("/get_audio/<int:id>")
