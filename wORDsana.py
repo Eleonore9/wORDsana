@@ -129,12 +129,11 @@ def display_collection():
 	rows = model.User.get_posts(user, user_id)
 	return render_template("display_collection.html", rows=rows)
 
+#------------------------All Collections-------------------------------
 @app.route("/all_collections")
-def display_collection():
-	user_id = session.get("user_id", None)
-	user = model.User.get(user_id)
-	rows = model.User.get_posts(user, user_id)
-	return render_template("display_collection.html", rows=rows)
+def all_collections():
+	all_posts = model.Post.all()
+	return render_template("all_collections.html", posts=all_posts)
 
 #--------------------------Saving audio -----------------------------
 
@@ -149,7 +148,7 @@ def crossdomain():
 
 @app.route("/record/<int:id>", methods=['POST'])
 def receive_audio(id):
-	new_file = open("/tmp/recording_%d.wav" % id, "w")
+	new_file = open("static/upload/recording_%d.wav" % id, "w")
 	new_file.write(request.data)
 	new_file.close()
 	post = model.Post.get(id)
@@ -159,7 +158,7 @@ def receive_audio(id):
 
 @app.route("/get_audio/<int:id>")
 def get_audio(id):
-	return send_from_directory("/tmp/", "recording_%d.wav" % 
+	return send_from_directory("static/upload/", "recording_%d.wav" % 
 		id)
 
 #-------------------------Log out------------------------------------

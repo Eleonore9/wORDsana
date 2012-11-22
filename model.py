@@ -130,6 +130,11 @@ class Post(Base):
 		post = session.query(Post).get(id)
 		return post
 
+	@classmethod
+	def all(cls):
+		posts = session.query(Post).all()
+		return posts
+
 	#--------instance methods------------------
 	def get_id(self, sound, text, posted_at, user_id):
 		pass

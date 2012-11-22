@@ -20,18 +20,15 @@
 
 <div class="background2">
 
-<h2>All sound collections on wORDsana</h2>
-
-
-
+	<h2>All sound collections on wORDsana</h2>
 
 </div> 
 <div class="low_backgrd">
 
-{% for row in rows %}
+{% for post in posts %}
 
-<li> Sound #{{ row.id }} : {{ row.text }} - URL: {{ row.sound }}, posted on {{ row.posted_at}}
-	<object width="142" height="60" data="/get_audio/{{ row.id }}">
+<li> {{ post.text }}, posted on {{ post.posted_at}}
+	<object width="142" height="60" data="/get_audio/{{ post.id }}">
 	</object>
 </li>
 
