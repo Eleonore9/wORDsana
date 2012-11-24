@@ -76,6 +76,10 @@ class User(Base):
 		row_collection = session.query(Post).filter_by(user_id=user_id).all()
 		return row_collection
 
+	def get_post(cls, user_id):
+		"""get Post using its id """
+		post = session.query(Post).get(id)
+		return post
 	# def get_posts_ids(self, user_id):
 	# 	row_collection = session.query(Post).filter_by(user_id=user_id).all()
 	# 	sound_collection = []
@@ -127,6 +131,7 @@ class Post(Base):
 
 	@classmethod
 	def get(cls, id):
+		"""get Post using its id """
 		post = session.query(Post).get(id)
 		return post
 
@@ -143,6 +148,18 @@ class Post(Base):
 		post = session.query(Post).get(post_id)
 		post.sound = sound_url
 		session.commit()
+
+	def num_likes(self, post_id):
+		# likes = session.query(Comment).filter_by(post_id=post_id, text==None).all()
+		all_comments = session.query(func.count(Comment.id))
+		comments = session.query(func.count(Comment.text))
+		likes = all_comments - comments
+		return likes
+
+	def num_comments(self, post_id):
+		# comments = session.query(Comment).filter_by(post_id=post_id, text!=None).all()
+		comments = session.query(func.count(Comment.text))
+		return comments
 
 #-------------------Comment Class----------------------------------
 class Comment(Base):
@@ -170,9 +187,22 @@ class Comment(Base):
 
 	#--------class methods--------------------
 	@classmethod
-	def new(cls, email, password, username):
-		pass
-		return new_thing()
+	def new_like(cls, sound, text, posted_at, user_id, post_id):
+		""" a "like" is a comment without sound or text """
+		now = datetime.datetime.now()
+		like = Post(None, None, now, user_id, post_id)
+		session.add(like)
+		session.commit()
+		return like
+		
+	@classmethod
+	def new_comment(cls, sound, text, posted_at, user_id, post_id):
+		""" a "comment" has text and can have sound """
+		now = datetime.datetime.now()
+		comment = Post(None, text, now, user_id, post_id)
+		session.add(comment)
+		session.commit()
+		return comment
 
 	@classmethod
 	def get(cls, id):

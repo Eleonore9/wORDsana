@@ -2,23 +2,21 @@
 {% block body %}
 
 <div class="navbar-fixed-top">
+	<!-- <div class= "navbar-inner"> -->
+	<div class="logo">
 	<a class="brand" href="{{url_for("index")}}">
-		<div class="logo">
-               <img src="static/img/logo2.png" alt="logo">
-        </div>
-    </a>
+		<img src="static/img/logo.png" alt="logo">
+    </a></div>
+    
     <ul class="nav">
-		<li="active">
-			<div class="nav_right">
-				<a href="{{url_for("about")}}">About</a>
-			</div>
-		</li>
-		<li>
-			<div class="collection">
-				<a href="{{url_for("all_collections")}}">All collections</a>
-			</div>
-		</li>
+		<li><div class="collection"><a href="{{url_for("all_collections")}}">All collections</a>
+		</div></li>
+		<!-- <li class="vertical-divider"></li> -->
+		<li><div class="nav_right"><a href="{{url_for("about")}}">About</a>
+		</div></li>
 	</ul>
+
+	<!-- </div> -->
 </div>
 
 

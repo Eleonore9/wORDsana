@@ -1,22 +1,23 @@
 {% extends "layout.html" %}
 {% block body %}
 
-	<div class="navbar-fixed-top">
-		<a class="brand" href="{{url_for("index")}}">
-			<div class="logo">
-                <img src="static/img/logo2.png" alt="logo">
-            </div>
-        </a>
-		<ul class="nav">
-			<li class="active">
-                <li><div class="nav_right"><a href="{{url_for("settings")}}" align="right">Settings</a></div></li>	
-                <li><div class="collection">
-				<a href="{{url_for("all_collections")}}">All collections</a>
-				</div></li>
-				<li><div class="btn_logout"><a href="{{url_for("logout")}}" class="btn btn-primary">Log out</a></div></li>
-			</li>
-		</ul>
-	</div>
+<div class="navbar-fixed-top">
+	<div class="logo">
+	<a class="brand" href="{{url_for("index")}}">
+		<img src="static/img/logo.png" alt="logo">
+    </a></div>
+	<ul class="nav">
+		<li><div class="nav_right">
+            <a href="{{url_for("settings")}}" align="right">Settings</a>
+        </div></li>	
+        <li><div class="collection">
+			<a href="{{url_for("all_collections")}}">All collections</a>
+		</div></li>
+		<li><div class="btn_logout">
+				<a href="{{url_for("logout")}}" class="btn btn-primary">Log out</a>
+		</div></li>
+	</ul>
+</div>
 
 
 
@@ -32,12 +33,16 @@
 <div class="low_backgrd">
 
 {% for row in rows %}
-
-<li> Sound #{{ row.id }} : {{ row.text }} - URL: {{ row.sound }}, posted on {{ row.posted_at}}
-	<object width="142" height="60" data="/get_audio/{{ row.id }}">
-	</object>
+<div class="sound_player">
+<li> <strong>{{ row.text }}</strong>, posted on {{ row.posted_at}}
+	<object width="142" height="60" data="/get_audio/{{ row.id }}"></object>
+	<form method='POST'>
+		<input type="submit" value="Like" class="btn btn-success"></input>
+		<textarea rows="2" name="comment" placeholder="Add a comment"></textarea>
+		<input type="submit" value="Comment" class="btn btn-inverse"></input>
+	</form>
 </li>
-
+</div>
 {% endfor %}
 
 	<div class="new_sound_btn">

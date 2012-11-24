@@ -23,7 +23,7 @@ def authenticate():
 	email = request.form['email']
 	password = request.form['password']
 	user_auth = model.User.authenticate(email, password)
-	if user_auth != None:
+	if user_auth is not None:
 		session['user_id'] = user_auth.id
 		flash('You were logged in successfully!')
 		return redirect(url_for("enter_text"))
@@ -105,6 +105,17 @@ def use_recorder(post_id):
 	flash('Log in to access this page!')
 	return redirect(url_for("index"))
 
+@app.route("/display_collection")
+def display_collection():
+	user_id = session.get("user_id", None)
+	user = model.User.get(user_id)
+	rows = model.User.get_posts(user, user_id)
+	post_id = rows.id
+	likes = model.Post.num_likes(post_id)
+	comments = model.Post.num_comments(post_id)
+	return render_template("display_collection.html", rows=rows, likes=likes, comments=comments)
+
+#-------------------------User parameters-------------------------------
 @app.route("/settings")
 def settings():
 	user_id = session.get("user_id", None)
@@ -121,13 +132,6 @@ def save_new_password():
 	model.User.change_password(user, user_id, new_password)
 	flash('Your new password has been saved!')
 	return redirect(url_for("settings"))
-
-@app.route("/display_collection")
-def display_collection():
-	user_id = session.get("user_id", None)
-	user = model.User.get(user_id)
-	rows = model.User.get_posts(user, user_id)
-	return render_template("display_collection.html", rows=rows)
 
 #------------------------All Collections-------------------------------
 @app.route("/all_collections")

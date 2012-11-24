@@ -22,6 +22,10 @@ h3 {
 	padding:10px;
 }
 
+a {
+	color:white;
+}
+
 .background {
 	border-bottom:1px solid grey;
 	background-image: url(/static/img/nasty_fabric.png);
@@ -46,30 +50,41 @@ h3 {
 }
 
 .navbar-fixed-top {
-	border:1px solid blue;
+	border-bottom:1px solid purple;
 	height:70px;
-	background-color:#80a0b7;
+	background-color:#195AAA;
 }
 
-.navbar-fixed-top .logo {
+.logo {
 	margin-top:5px;
 	margin-left:10px;
 	height:50px;
 	width:70px;
 }
-
-.navbar-fixed-top .nav_right {
+.collection {
+	margin-bottom: 5px;
+	border:1px solid blue;
+	text-align:center;
+}
+.nav_right {
+	margin-bottom: 5px;
 	border:1px solid green;
 	text-align:right;
 	margin-right: 40px;
-	position:relative;
-
+	
 }
 
-.navbar-fixed-top .btn_logout {
+
+/*.navbar-fixed-top .btn_logout {
 	border:1px solid red;
 }
+*/
 
+/*.navbar-fixed-top a {
+	border:1px solid red;
+	margin-top:auto;
+}
+*/
 .low_backgrd {
 	background-image: url(/static/img/cream_dust.png);
 	position:absolute;
@@ -178,3 +193,7 @@ ul {
 	margin-left:200px;
 
 }*/
+
+.sound_player {
+	border:1px solid purple;
+}
