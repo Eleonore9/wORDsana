@@ -10,7 +10,7 @@ h1 {
 }
 
 h2 {
-	margin-left:50px;
+	margin-left:400px;
 	margin-top:40px;
 	padding-top:5px;
 }
@@ -39,7 +39,8 @@ a {
 	border-bottom:1px solid grey;
 	background-image: url(/static/img/nasty_fabric.png);
 	position:relative;
-	height:200px;
+	margin-top: 10px;
+	height:300px;
 	padding:50px;
 	width: 100%;
 }
@@ -49,36 +50,67 @@ a {
 	height:auto;
 }
 
-.navbar-fixed-top {
-	border-bottom:1px solid purple;
-	height:70px;
-	background-color:#195AAA;
+header {
+	color:#195AAA;
 }
 
+header .container {
+	background-color:#195AAA;
+	/*border:1px solid #3477C9;*/
+	height:70px;
+}
+
+.navbar-fixed-top {
+	border-bottom:1px solid grey;
+	display: block;
+	height:70px;
+}
+.navbar-fixed-top .nav {
+	float:right;
+	z-index:999;
+	display:block;
+}
+
+.navbar-fixed-top .navbar-inner {
+	background-image:url(/static/img/gplaypattern.png);;
+	height: 70px;
+}
+/*.navbar-fixed-top .nav li {
+	z-index: 1000;
+	display: block;
+	line-height:18px;
+}*/
+
 .logo {
+	float:left;
 	margin-top:5px;
 	margin-left:10px;
 	height:50px;
 	width:70px;
 }
 .collection {
+	margin-top: auto;
 	margin-bottom: 5px;
-	border:1px solid blue;
-	text-align:center;
+	margin-left: 150px;
+	/*border:1px solid blue;*/
+	text-align:left;
+	margin-right: 20px;
 }
 .nav_right {
 	margin-bottom: 5px;
-	border:1px solid green;
+	/*border:1px solid green;*/
 	text-align:right;
-	margin-right: 40px;
-	
+	margin-right: 20px;
+	margin-left: 100px;
 }
 
-
-/*.navbar-fixed-top .btn_logout {
-	border:1px solid red;
+.navbar-fixed-top .btn_logout {
+	/*border:1px solid red;*/
+	margin-right: 20px;
+	margin-left: 150px;
+	margin-top: -4px;
+	text-align: right;
 }
-*/
 
 /*.navbar-fixed-top a {
 	border:1px solid red;

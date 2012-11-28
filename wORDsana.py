@@ -72,10 +72,12 @@ def about():
 
 @app.route("/enter_text")
 def enter_text():
+	print "At /enter_text"
 	user_id = session.get("user_id", None)
 	if user_id:
 		return render_template("enter_text.html")
 	
+	print "not logged in"
 	flash('Log in to access this page!')
 	return redirect(url_for("index"))
 
@@ -91,10 +93,7 @@ def save_text():
 	posted_at = datetime.datetime.now()
 	post = model.Post.new(None, text, posted_at, user_id)
 	post_id = post.id
-	url = url_for("use_recorder", post_id=post_id)
-	print url
-	return redirect(url)
-
+	return redirect(url_for("use_recorder", post_id=post_id))
 
 @app.route("/recorder/<int:post_id>")
 def use_recorder(post_id):
@@ -105,17 +104,21 @@ def use_recorder(post_id):
 	flash('Log in to access this page!')
 	return redirect(url_for("index"))
 
+#for Sound files and Sound URLs, cf. "Saving Audio"
+
 @app.route("/display_collection")
 def display_collection():
 	user_id = session.get("user_id", None)
 	user = model.User.get(user_id)
 	rows = model.User.get_posts(user, user_id)
-	post_id = rows.id
-	likes = model.Post.num_likes(post_id)
-	comments = model.Post.num_comments(post_id)
-	return render_template("display_collection.html", rows=rows, likes=likes, comments=comments)
+	for row in rows:
+		post_id = row.id
+		num_likes = model.Post.num_likes(row, post_id)
+		num_comments = model.Post.num_comments(row, post_id)
+	# return render_template("display_collection.html", rows=rows)
+	return render_template("display_collection.html", rows=rows, num_likes=num_likes, num_comments=num_comments)
 
-#-------------------------User parameters-------------------------------
+#-------------------------User Settingss-------------------------------
 @app.route("/settings")
 def settings():
 	user_id = session.get("user_id", None)
@@ -165,6 +168,44 @@ def get_audio(id):
 	return send_from_directory("static/upload/", "recording_%d.wav" % 
 		id)
 
+#-------------------------Adding comments----------------------------
+@app.route("/add_like/<int:post_id>", methods=['POST'])
+def add_like(post_id):
+	posted_at = datetime.datetime.now()
+	user_id = session.get("user_id", None)
+	model.Comment.new_like(posted_at, post_id, user_id)
+	return redirect(url_for("display_collection"))
+
+@app.route("/add_text_comment", methods=['POST'])
+def text_comment(post_id):
+	text = request.form['text_comment']
+	posted_at = datetime.datetime.now()
+	user_id = session.get("user_id", None)
+	model.Comment.new_text(text, posted_at, post_id, user_id)
+	return redirect(url_for("display_collection"))
+
+#-------------------------Deleting stuffs----------------------------
+@app.route("/delete_sound/<int:post_id>", methods=['POST'])
+def delete_sound(post_id):
+	post = model.Post.get(post_id)
+	model.Post.delete_sound(post, post_id)
+	flash('Your sound was deleted')
+	return redirect(url_for("display_collection"))
+
+@app.route("/delete_text/<int:post_id>", methods=['POST'])
+def delete_text(post_id):
+	post = model.Post.get(post_id)
+	model.Post.delete_text(post, post_id)
+	flash('Your text was deleted')
+	return redirect(url_for("display_collection"))
+
+@app.route("/delete_comment/<int:post_id>", methods=['POST'])
+def delete_comment(post_id):
+	post = model.Post.get(post_id)
+	model.Post.delete_comment(post, post_id)
+	flash('Your comment was deleted')
+	return redirect(url_for("display_collection"))
+
 #-------------------------Log out------------------------------------
 @app.route("/logout")
 def logout():
@@ -174,9 +215,9 @@ def logout():
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    # app.run(debug=True)
 
-# app.run(debug=True, host="0.0.0.0")
+	app.run(debug=True, host="0.0.0.0")
 
 
 

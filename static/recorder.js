@@ -24,19 +24,19 @@ Wami.nameCallback = function(cb, cleanup) {
 // This method ensures that a WAMI recorder is operational, and that
 // the following API is available in the Wami namespace. All functions
 // must be named (i.e. cannot be anonymous).
-//
+
 // Wami.startPlaying(url, startfn = null, finishedfn = null, failedfn = null);
 // Wami.stopPlaying()
-//
+
 // Wami.startRecording(url, startfn = null, finishedfn = null, failedfn = null);
 // Wami.stopRecording()
-//
+
 // Wami.getRecordingLevel() // Returns a number between 0 and 100
 // Wami.getPlayingLevel() // Returns a number between 0 and 100
-//
+
 // Wami.hide()
 // Wami.show()
-//
+
 // Manipulate the WAMI recorder's settings. In Flash
 // we need to check if the microphone permission has been granted.
 // We might also set/return sample rate here, etc.

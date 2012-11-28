@@ -40,6 +40,7 @@
 				onReady : setupGUI,
 				swfUrl: "/static/Wami.swf"
 			});
+			Wami.setSettings({'sampleRate':16000, 'allrates':true, 'rate': 16000});
 		}
 
 		function setupGUI() {
@@ -57,23 +58,33 @@
 	<body onload="setupRecorder()">
 		<div class="container">
 
+<header>
 <div class="navbar-fixed-top">
-	<div class="logo">
-	<a class="brand" href="{{url_for("index")}}">
-		<img src="static/img/logo.png" alt="logo">
-    </a></div>
-	<ul class="nav">
-		<li><div class="nav_right">
-            <a href="{{url_for("settings")}}" align="right">Settings</a>
-        </div></li>	
-        <li><div class="collection">
-			<a href="{{url_for("all_collections")}}">All collections</a>
-		</div></li>
-		<li><div class="btn_logout">
-				<a href="{{url_for("logout")}}" class="btn btn-primary">Log out</a>
-		</div></li>
-	</ul>
+	<div class= "navbar-inner">
+		<div class="container">
+			<div class="logo">
+				<a class="brand" href="{{url_for("index")}}">
+					<img src="/static/img/logo.png" alt="logo">
+					<span style="font-size: 24px; margin-top:-40px; margin-left: 400px; display: block; width: 130px;">
+						wORDsana 
+					</span>
+				</a>
+			</div>
+    	<nav>
+    		<ul id="nav" class="nav">
+				<li class="collection"><a href="{{url_for("all_collections")}}">All collections</a>
+				</li>
+				<li class="nav_right"><a href="{{url_for("settings")}}">Settings</a>
+				</li>
+				<li><div class="btn_logout">
+				<a href="{{url_for("logout")}}" class="btn btn-mini btn-primary">Log out</a>
+			</div></li>
+			</ul>
+		</nav>
+		</div>
+	</div>
 </div>
+</header>
 
 <div class="background">
 
