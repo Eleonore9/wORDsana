@@ -20,12 +20,16 @@ def index():
 
 @app.route("/authenticate", methods=['POST'])
 def authenticate():
+	print 1
 	email = request.form['email']
 	password = request.form['password']
+	print 2
 	user_auth = model.User.authenticate(email, password)
+	print 3
 	if user_auth is not None:
 		session['user_id'] = user_auth.id
 		flash('You were logged in successfully!')
+		print 4
 		return redirect(url_for("enter_text"))
 	return redirect(url_for("index"))
 
@@ -215,9 +219,9 @@ def logout():
 
 
 if __name__ == "__main__":
-    # app.run(debug=True)
+    app.run(debug=True, host="0.0.0.0", port=5000)
 
-	app.run(debug=True, host="0.0.0.0")
+	# app.run(debug=True, host="0.0.0.0")
 
 
 

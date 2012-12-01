@@ -1,4 +1,4 @@
-<!doctype html>
+<!-- <!doctype html>
 
 <!-- layout template adapted from Tipsy and WAMI recorder index.html-->
 
@@ -6,10 +6,9 @@
 	<head>
 		<meta charset="utf-8">
 		<title>wORDsana - your words, your way</title>
-		<link rel="stylesheet" href="/static/css/bootstrap.css"
-		type="text/css">
-		<link rel="stylesheet" href="/static/css/project.css"
-		type="text/css">
+		<link href='http://fonts.googleapis.com/css?family=Merienda' rel='stylesheet' type='text/css'>
+		<link rel="stylesheet" href="/static/css/bootstrap.css" type="text/css">
+		<link rel="stylesheet" href="/static/css/project.css" type="text/css">
 
 		{% with messages = get_flashed_messages() %}
   			{% if messages %}
@@ -40,7 +39,7 @@
 				onReady : setupGUI,
 				swfUrl: "/static/Wami.swf"
 			});
-			Wami.setSettings({'sampleRate':16000, 'allrates':true, 'rate': 16000});
+			// Wami.setSettings({'sampleRate':16000, 'allrates':true, 'rate': 16000});
 		}
 
 		function setupGUI() {
@@ -56,61 +55,65 @@
 	</head>
 
 	<body onload="setupRecorder()">
-		<div class="container">
+	<div class="container">
 
-<header>
-<div class="navbar-fixed-top">
-	<div class= "navbar-inner">
-		<div class="container">
-			<div class="logo">
-				<a class="brand" href="{{url_for("index")}}">
-					<img src="/static/img/logo.png" alt="logo">
-					<span style="font-size: 24px; margin-top:-40px; margin-left: 400px; display: block; width: 130px;">
-						wORDsana 
-					</span>
-				</a>
-			</div>
-    	<nav>
-    		<ul id="nav" class="nav">
-				<li class="collection"><a href="{{url_for("all_collections")}}">All collections</a>
-				</li>
-				<li class="nav_right"><a href="{{url_for("settings")}}">Settings</a>
-				</li>
-				<li><div class="btn_logout">
-				<a href="{{url_for("logout")}}" class="btn btn-mini btn-primary">Log out</a>
-			</div></li>
-			</ul>
-		</nav>
-		</div>
-	</div>
-</div>
-</header>
+			<header>
+			<div class="navbar-fixed-top">
+				<div class= "navbar-inner">
+					<div class="container">
+						<div class="logo">
+							<a class="brand" href="{{url_for("index")}}">
+								<img src="/static/img/logo.png" alt="logo">
+								<span style="font-family:'Merienda', cursive;font-size: 28px; margin-top:-40px; margin-left: 400px; display: block; width: 130px;">
+									wORDsana 
+								</span>
+							</a>
+						</div>
+					<nav>
+						<ul id="nav" class="nav">
+							<li class="collection"><a href="{{url_for("all_collections")}}">All collections</a>
+							</li>
+							<li class="nav_right"><a href="{{url_for("settings")}}">Settings</a>
+							</li>
+							<li><div class="btn_logout"><a href="{{url_for("logout")}}" class="btn btn-mini btn-primary">Log out</a></div></li>
+						</ul>
+					</nav>
+					</div>
+				</div>
+				</div>	
+			</header>
+
 
 <div class="background">
 
 <h2>User 's collection of words</h2>
-
-
-
 <h3> Step 2: Record yourself </h3>
-
-<!-- <div onload="setupRecorder()"> -->
-
-<div onload="setupGUI">
-	<div class="row">
-	<div id="wami" class="span4" style="margin-left: 200px;" >
-
+<!-- <div onload="setupRecorder()">  -->
+	<div>
+		<div class="row">
+		<div id="wami" class="span4" style="margin-left: 200px;" >
+			<!-- <div style="position: absolute; z-index: 99999;" id="widc384a43fd92">
+				<object type="application/x-shockwave-flash" data="/static/Wami.swf" width="214" height="137" id="wida277b83d555" style="visibility: visible;">
+					<param name="allowScriptAccess" value="always">
+					<param name="wmode" value="transparent">
+					<param name="flashvars" value="visible=false&amp;loadedCallback=Wami._callbacks['widd672b3fe151']&amp;console=true">
+				</object>
+			</div> -->
+		</div>
+		</div>
 	</div>
-	</div>
-</div>
+<!-- </div> -->
 </div>
 
 <div class="low_backgrd">
-	<div class="collection_btn">
-	<a class="btn btn-large btn-inverse" href="{{url_for("display_collection")}}"> View collection </a>
-	</div>
-</div> 
-
+		<div class="collection_btn">
+		<a class="btn btn-large btn-inverse" href="{{url_for("display_collection")}}"> View collection </a>
 		</div>
+</div>
+	
+	
+ 
+
+	</div>
 	</body>
-</html>
+</html> -->

@@ -150,16 +150,18 @@ class Post(Base):
 		session.commit()
 
 	def num_likes(self, post_id):
+		pass
 		# likes = session.query(Comment).filter_by(post_id=post_id, text==None).all()
-		all_comments = session.query(func.count(Comment.id))
-		comments = session.query(func.count(Comment.text))
-		likes = all_comments - comments
-		return likes
+		# # all_comments = session.query(func.count(Comment.id))
+		# # comments = session.query(func.count(Comment.text))
+		# # likes = all_comments - comments
+		# return likes
 
 	def num_comments(self, post_id):
+		pass
 		# comments = session.query(Comment).filter_by(post_id=post_id, text!=None).all()
-		comments = session.query(func.count(Comment.text))
-		return comments
+		# # comments = session.query(func.count(Comment.text))
+		# return comments
 
 #-------------------Comment Class----------------------------------
 class Comment(Base):
