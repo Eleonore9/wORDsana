@@ -1,10 +1,11 @@
+import decimal
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import create_engine, ForeignKey
-from sqlalchemy import Column, Integer, String, DateTime
+from sqlalchemy import Column, Integer, String, DateTime, Boolean
 import datetime
 from sqlalchemy.orm import sessionmaker, relationship, backref, scoped_session
 
-engine = create_engine("sqlite:///ele_project.db", echo=False)
+engine = create_engine("sqlite:///ele_wordsana.db", echo=False)
 session = scoped_session(sessionmaker(bind=engine,
 									autocommit = False,
 									autoflush = False))
@@ -73,7 +74,7 @@ class User(Base):
 	# 	return user_id
 
 	def get_posts(self, user_id):
-		row_collection = session.query(Post).filter_by(user_id=user_id).all()
+		row_collection = session.query(Post).filter_by(user_id=user_id).order_by(Post.id.desc()).all()
 		return row_collection
 
 	def get_post(cls, user_id):
@@ -168,6 +169,7 @@ class Comment(Base):
 	__tablename__ = "comments"
 
 	id = Column(Integer, primary_key = True)
+	like = Column(Boolean, default=False)
 	sound = Column(String(150), nullable=True)
 	text = Column(String(150), nullable=True)
 	posted_at = Column(DateTime())
@@ -180,8 +182,9 @@ class Comment(Base):
 	post = relationship("Post",
 		backref=backref("comments", order_by=id))
 
-	def __init__(self, sound, text, posted_at, user_id, post_id):
+	def __init__(self, like, sound, text, posted_at, user_id, post_id):
 		self.sound = sound
+		selflike = like
 		self.text = text
 		self.posted_at = posted_at
 		self.user_id = user_id
@@ -189,19 +192,21 @@ class Comment(Base):
 
 	#--------class methods--------------------
 	@classmethod
-	def new_like(cls, sound, text, posted_at, user_id, post_id):
+	def new_like(cls, like, sound, text, posted_at, user_id, post_id):
 		""" a "like" is a comment without sound or text """
-		now = datetime.datetime.now()
-		like = Post(None, None, now, user_id, post_id)
-		session.add(like)
-		session.commit()
-		return like
+		prev_like = session.query(Comment).filter_by(user_id=user_id, post_id=post_id)
+		if prev_like is None:
+			now = datetime.datetime.now()
+			like = Comment(True, None, None, now, user_id, post_id)
+			session.add(like)
+			session.commit()
+			return like
 		
 	@classmethod
-	def new_comment(cls, sound, text, posted_at, user_id, post_id):
+	def new_comment(cls, like, sound, text, posted_at, user_id, post_id):
 		""" a "comment" has text and can have sound """
 		now = datetime.datetime.now()
-		comment = Post(None, text, now, user_id, post_id)
+		comment = Comment(None, text, now, user_id, post_id)
 		session.add(comment)
 		session.commit()
 		return comment

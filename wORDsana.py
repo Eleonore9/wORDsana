@@ -5,6 +5,7 @@ from flask import Flask, flash, render_template, redirect, request
 from flask import url_for, session, send_from_directory
 import model
 import datetime
+import pretty
 
 app = Flask(__name__)
 app.secret_key = 'je_peux_pas_le_dire_c_est_un_secret'
@@ -115,12 +116,12 @@ def display_collection():
 	user_id = session.get("user_id", None)
 	user = model.User.get(user_id)
 	rows = model.User.get_posts(user, user_id)
-	for row in rows:
-		post_id = row.id
-		num_likes = model.Post.num_likes(row, post_id)
-		num_comments = model.Post.num_comments(row, post_id)
-	# return render_template("display_collection.html", rows=rows)
-	return render_template("display_collection.html", rows=rows, num_likes=num_likes, num_comments=num_comments)
+	# for row in rows:
+	# 	post_id = row.id
+	# 	num_likes = model.Post.num_likes(row, post_id)
+	# 	num_comments = model.Post.num_comments(row, post_id)
+	return render_template("display_collection.html", rows=rows)
+	#return render_template("display_collection.html", rows=rows, num_likes=num_likes, num_comments=num_comments)
 
 #-------------------------User Settingss-------------------------------
 @app.route("/settings")
@@ -159,7 +160,7 @@ def crossdomain():
 
 @app.route("/record/<int:id>", methods=['POST'])
 def receive_audio(id):
-	new_file = open("static/upload/recording_%d.wav" % id, "w")
+	new_file = open("static/upload/recording_%d.wav" % id, "wb")
 	new_file.write(request.data)
 	new_file.close()
 	post = model.Post.get(id)
@@ -177,7 +178,7 @@ def get_audio(id):
 def add_like(post_id):
 	posted_at = datetime.datetime.now()
 	user_id = session.get("user_id", None)
-	model.Comment.new_like(posted_at, post_id, user_id)
+	model.Comment.new_like(True, None, None, posted_at, post_id, user_id)
 	return redirect(url_for("display_collection"))
 
 @app.route("/add_text_comment", methods=['POST'])
@@ -216,6 +217,12 @@ def logout():
 	session.pop('user_id', None)
 	flash('You were logged out.')
 	return redirect(url_for('index'))
+
+
+#-------------------------calling Flask Filters ---------------------
+@app.template_filter("pretty_date")
+def pretty_date_filter(d):
+	return pretty.date(d)
 
 
 if __name__ == "__main__":

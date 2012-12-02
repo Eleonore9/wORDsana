@@ -44,7 +44,7 @@
 {% for row in rows %}
 <div class="sound_player">
 
-<li> <strong>{{ row.text }}</strong>, posted on {{ row.posted_at}}
+<li> <strong>{{ row.text }}</strong>, posted {{ row.posted_at | pretty_date}}
 	<!-- Sound player -->
 	<!-- <object width="142" height="70" data="/get_audio/{{ row.id }}"></object> -->
 	<!--use the audio tag! It works in Chrome (but not in FF)-->
@@ -52,6 +52,7 @@
 	 <source src="/get_audio/{{ row.id }}" type="audio/wav">
 	</audio>
 
+	<!--should be able to edit the posts-->
 	<!-- Delete Sound Post -->
 	<!--<form method='POST' action="{{url_for("delete_sound", post_id=row.id)}}">
 		<input type="submit" value="Delete sound" class="btn"></input>
