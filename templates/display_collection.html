@@ -46,32 +46,43 @@
 
 <li> <strong>{{ row.text }}</strong>, posted on {{ row.posted_at}}
 	<!-- Sound player -->
-	<object width="142" height="70" data="/get_audio/{{ row.id }}"></object>
+	<!-- <object width="142" height="70" data="/get_audio/{{ row.id }}"></object> -->
+	<!--use the audio tag! It works in Chrome (but not in FF)-->
+	<audio controls="controls" width="142" height="70" >
+	 <source src="/get_audio/{{ row.id }}" type="audio/wav">
+	</audio>
+
 	<!-- Delete Sound Post -->
-	<form method='POST' action="{{url_for("delete_sound", post_id=row.id)}}">
+	<!--<form method='POST' action="{{url_for("delete_sound", post_id=row.id)}}">
 		<input type="submit" value="Delete sound" class="btn"></input>
-	</form>
+	</form>-->
 	<!-- Delete Text Post -->
-	<form method='POST' action="{{url_for("delete_text", post_id=row.id)}}">
+	<!--<form method='POST' action="{{url_for("delete_text", post_id=row.id)}}">
 		<input type="submit" value="Delete text" class="btn"></input>
-	</form>
+	</form> -->
+
 	<!-- Add Like -->
 	<form method='POST' action="add_like/{{row.id}}">
 		<input type="submit" value="Like" class="btn btn-success"></input>
 	</form>
+
 	<!-- Count Likes -->
 	{{num_likes}} Likes
+
 	<!-- Add text Comment -->
 	<form method='POST' action="{{url_for("text_comment", post_id=row.id)}}">
 		<textarea rows="2" name="text_comment" placeholder="Add a comment"></textarea>
 		<input type="submit" value="Comment" class="btn btn-inverse"></input>
 	</form>
+
 	<!-- Count Comments -->
-	{{num_comments}} Comments
+	<!--{{num_comments}} Comments-->
+
 	<!-- Delete text Comment -->
-	<form method='POST' action="{{url_for("delete_comment", post_id=row.id)}}">
+	<!--<form method='POST' action="{{url_for("delete_comment", post_id=row.id)}}">
 		<input type="submit" value="Delete comment" class="btn"></input>
-	</form>
+	</form>-->
+
 </li>
 </div>
 {% endfor %}
