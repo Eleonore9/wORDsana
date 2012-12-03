@@ -41,52 +41,53 @@
 </div> 
 <div class="low_backgrd">
 
-{% for row in rows %}
-<div class="sound_player">
+	{% for row in rows %}
+	<div>
+		<div class="sound_player"></div>
 
-<li> <strong>{{ row.text }}</strong>, posted {{ row.posted_at | pretty_date}}
-	<!-- Sound player -->
-	<!-- <object width="142" height="70" data="/get_audio/{{ row.id }}"></object> -->
-	<!--use the audio tag! It works in Chrome (but not in FF)-->
-	<audio controls="controls" width="142" height="70" >
-	 <source src="/get_audio/{{ row.id }}" type="audio/wav">
-	</audio>
+		<strong>{{ row.text }}</strong>, posted {{ row.posted_at | pretty_date}}
 
-	<!--should be able to edit the posts-->
-	<!-- Delete Sound Post -->
-	<!--<form method='POST' action="{{url_for("delete_sound", post_id=row.id)}}">
-		<input type="submit" value="Delete sound" class="btn"></input>
-	</form>-->
-	<!-- Delete Text Post -->
-	<!--<form method='POST' action="{{url_for("delete_text", post_id=row.id)}}">
-		<input type="submit" value="Delete text" class="btn"></input>
-	</form> -->
+			{# Sound player #}
+			{# use the audio tag! It works in Chrome (but pb in FF)#}
+			<audio controls="controls" width="142" height="70" >
+			 <source src="/get_audio/{{ row.id }}" type="audio/wav">
+			</audio>
 
-	<!-- Add Like -->
-	<form method='POST' action="add_like/{{row.id}}">
-		<input type="submit" value="Like" class="btn btn-success"></input>
-	</form>
+			{# should be able to edit the posts #}
 
-	<!-- Count Likes -->
-	{{num_likes}} Likes
+			{# Add Like #}
+			<form method='POST' action="/add_like/{{row.id}}">
+				<input type="submit" value="Like" class="btn btn-success"></input>
+			</form>
 
-	<!-- Add text Comment -->
-	<form method='POST' action="{{url_for("text_comment", post_id=row.id)}}">
-		<textarea rows="2" name="text_comment" placeholder="Add a comment"></textarea>
-		<input type="submit" value="Comment" class="btn btn-inverse"></input>
-	</form>
 
-	<!-- Count Comments -->
-	<!--{{num_comments}} Comments-->
+			{# Count Likes #}
+			{# {{num_likes}} Likes #}
 
-	<!-- Delete text Comment -->
-	<!--<form method='POST' action="{{url_for("delete_comment", post_id=row.id)}}">
-		<input type="submit" value="Delete comment" class="btn"></input>
-	</form>-->
+			{# Add text Comment #}
+			<form method='POST' action="/add_text_comment/{{row.id}}">
+				<textarea rows="2" name="text_comment" placeholder="Add a comment"></textarea>
+				<input type="submit" value="Comment" class="btn btn-inverse"></input>
+			</form>
 
-</li>
-</div>
-{% endfor %}
+			{#  Display text_comments added #}
+			<ul>
+				{% for comment in row.comments %}					
+					<li>commented {{comment.posted_at | pretty_date}} : <strong>{{comment.text}}</strong></li>
+				{% endfor %}
+			</ul>
+
+			{# Count Comments #}
+			{# {{num_comments}} Comments #}
+
+			{# Delete text Comment 
+			<form method='POST' action="{{url_for("delete_comment", post_id=row.id)}}">
+				<input type="submit" value="Delete comment" class="btn"></input>
+			</form> #}
+
+		
+		</div>
+	{% endfor %}
 
 	<div class="new_sound_btn">
 	<a class="btn btn-large btn-inverse" href="{{url_for("enter_text")}}"> Create a new sound! </a>

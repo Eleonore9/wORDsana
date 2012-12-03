@@ -1,4 +1,3 @@
-import decimal
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import create_engine, ForeignKey
 from sqlalchemy import Column, Integer, String, DateTime, Boolean
@@ -77,7 +76,7 @@ class User(Base):
 		row_collection = session.query(Post).filter_by(user_id=user_id).order_by(Post.id.desc()).all()
 		return row_collection
 
-	def get_post(cls, user_id):
+	def get_post(self, user_id):
 		"""get Post using its id """
 		post = session.query(Post).get(id)
 		return post
@@ -150,6 +149,14 @@ class Post(Base):
 		post.sound = sound_url
 		session.commit()
 
+	# def get_comments(self, post_id, user_id):
+	# 	comments = session.query(Comment).filter_by(post_id=post_id, user_id=user_id).all()
+	# 	return comments
+
+	def get_comments(self, post_id):
+		comments = session.query(Comment).filter_by(post_id=post_id).all()
+		return comments
+
 	def num_likes(self, post_id):
 		pass
 		# likes = session.query(Comment).filter_by(post_id=post_id, text==None).all()
@@ -194,19 +201,22 @@ class Comment(Base):
 	@classmethod
 	def new_like(cls, like, sound, text, posted_at, user_id, post_id):
 		""" a "like" is a comment without sound or text """
-		prev_like = session.query(Comment).filter_by(user_id=user_id, post_id=post_id)
-		if prev_like is None:
+		prev_like = session.query(Comment).filter_by(like=1, user_id=user_id, post_id=post_id).first()
+		print 1
+		if prev_like :
+			print 2
 			now = datetime.datetime.now()
-			like = Comment(True, None, None, now, user_id, post_id)
+			like = Comment(1, None, None, now, user_id, post_id)
 			session.add(like)
 			session.commit()
+			print 3
 			return like
 		
 	@classmethod
 	def new_comment(cls, like, sound, text, posted_at, user_id, post_id):
 		""" a "comment" has text and can have sound """
 		now = datetime.datetime.now()
-		comment = Comment(None, text, now, user_id, post_id)
+		comment = Comment(0, None, text, now, user_id, post_id)
 		session.add(comment)
 		session.commit()
 		return comment
@@ -219,6 +229,11 @@ class Comment(Base):
 	#--------instance methods------------------
 	def get_id(self, sound, text, posted_at, user_id, post_id):
 		pass
+
+	# def get_comments(self, post_id, user_id):
+	# 	comments = session.query(Comment).filter_by(post_id=post_id, user_id=user_id).all()
+	# 	return comments
+
 
 #End of Classes definition
 

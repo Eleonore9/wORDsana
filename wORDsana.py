@@ -118,9 +118,11 @@ def display_collection():
 	rows = model.User.get_posts(user, user_id)
 	# for row in rows:
 	# 	post_id = row.id
+	# 	comments = model.Post.get_comments(row, post_id)
 	# 	num_likes = model.Post.num_likes(row, post_id)
 	# 	num_comments = model.Post.num_comments(row, post_id)
 	return render_template("display_collection.html", rows=rows)
+	#return render_template("display_collection.html", rows=rows, comments=comments)
 	#return render_template("display_collection.html", rows=rows, num_likes=num_likes, num_comments=num_comments)
 
 #-------------------------User Settingss-------------------------------
@@ -178,15 +180,17 @@ def get_audio(id):
 def add_like(post_id):
 	posted_at = datetime.datetime.now()
 	user_id = session.get("user_id", None)
-	model.Comment.new_like(True, None, None, posted_at, post_id, user_id)
+	model.Comment.new_like(1, None, None, posted_at, post_id, user_id)
 	return redirect(url_for("display_collection"))
 
-@app.route("/add_text_comment", methods=['POST'])
+@app.route("/add_text_comment/<int:post_id>", methods=['POST'])
 def text_comment(post_id):
+	print post_id
 	text = request.form['text_comment']
 	posted_at = datetime.datetime.now()
 	user_id = session.get("user_id", None)
-	model.Comment.new_text(text, posted_at, post_id, user_id)
+	print user_id
+	model.Comment.new_comment(0, None, text, posted_at, user_id, post_id)
 	return redirect(url_for("display_collection"))
 
 #-------------------------Deleting stuffs----------------------------
