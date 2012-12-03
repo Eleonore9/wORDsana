@@ -4,28 +4,13 @@ from sqlalchemy import Column, Integer, String, DateTime, Boolean
 import datetime
 from sqlalchemy.orm import sessionmaker, relationship, backref, scoped_session
 
-engine = create_engine("sqlite:///ele_wordsana.db", echo=False)
+engine = create_engine("sqlite:///ele_project.db", echo=False)
 session = scoped_session(sessionmaker(bind=engine,
 									autocommit = False,
 									autoflush = False))
 Base = declarative_base()
 Base.query = session.query_property()
 
-
-#-------------------------------------------General functions:
-def new_thing(table, columns, values):
-	"""insert a new user, post, comment into the database"""
-	pass
-	#insert in a specific table the values given taking into account the 
-	#columns order
-	
-	# thing = table(values)
-	# session.add(thing)
-	# session.commit()
-
-def get_thing(id):
-	"""retrieve a user, post, comment with its id"""
-	pass
 
 #--------------------------------------------CLASSES definition:
 #-------------------User Class----------------------------------
@@ -110,21 +95,23 @@ class Post(Base):
 	text = Column(String(150), nullable=True)
 	posted_at = Column(DateTime())
 	user_id = Column(Integer, ForeignKey('users.id'))
+	like = Column(Boolean, default=False)
 
 	user = relationship("User",
 		backref=backref("posts", order_by=id))
 
-	def __init__(self, sound, text, posted_at, user_id):
+	def __init__(self, sound, text, posted_at, user_id, like):
 		self.sound = sound
 		self.text = text
 		self.posted_at = posted_at
 		self.user_id = user_id
+		self.like = like
 
 	#--------class methods--------------------
 	@classmethod
-	def new(cls, sound, text, posted_at, user_id):
+	def new(cls, sound, text, posted_at, user_id, like):
 		now = datetime.datetime.now()
-		post = Post(None, text, now, user_id)
+		post = Post(None, text, now, user_id, False)
 		session.add(post)
 		session.commit()
 		return post
@@ -176,7 +163,6 @@ class Comment(Base):
 	__tablename__ = "comments"
 
 	id = Column(Integer, primary_key = True)
-	like = Column(Boolean, default=False)
 	sound = Column(String(150), nullable=True)
 	text = Column(String(150), nullable=True)
 	posted_at = Column(DateTime())
@@ -189,34 +175,24 @@ class Comment(Base):
 	post = relationship("Post",
 		backref=backref("comments", order_by=id))
 
-	def __init__(self, like, sound, text, posted_at, user_id, post_id):
+	def __init__(self, sound, text, posted_at, user_id, post_id):
 		self.sound = sound
-		selflike = like
 		self.text = text
 		self.posted_at = posted_at
 		self.user_id = user_id
 		self.post_id = post_id
 
-	#--------class methods--------------------
-	@classmethod
-	def new_like(cls, like, sound, text, posted_at, user_id, post_id):
-		""" a "like" is a comment without sound or text """
-		now = datetime.datetime.now()
-		like = Comment(1, None, None, now, user_id, post_id)
-		session.add(like)
-		session.commit()
-		return like
-		
-	@classmethod
-	def check_like(cls, like, user_id, post_id):
-		prev_like = session.query(Comment).filter_by(like=1, user_id=user_id, post_id=post_id).first()
-		return prev_like
+	#--------class methods--------------------	
+	# @classmethod
+	# def check_like(cls, like, user_id, post_id):
+	# 	prev_like = session.query(Comment).filter_by(like=True, user_id=user_id, post_id=post_id).first()
+	# 	return prev_like
 
 	@classmethod
-	def new_comment(cls, like, sound, text, posted_at, user_id, post_id):
+	def new_comment(cls, sound, text, posted_at, user_id, post_id):
 		""" a "comment" has text and can have sound """
 		now = datetime.datetime.now()
-		comment = Comment(0, None, text, now, user_id, post_id)
+		comment = Comment(None, text, now, user_id, post_id)
 		session.add(comment)
 		session.commit()
 		return comment

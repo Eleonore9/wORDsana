@@ -96,7 +96,7 @@ def save_text():
 
 	text = request.form['text']
 	posted_at = datetime.datetime.now()
-	post = model.Post.new(None, text, posted_at, user_id)
+	post = model.Post.new(None, text, posted_at, user_id, None)
 	post_id = post.id
 	return redirect(url_for("use_recorder", post_id=post_id))
 
@@ -117,11 +117,13 @@ def display_collection():
 	user = model.User.get(user_id)
 	rows = model.User.get_posts(user, user_id)
 	# for row in rows:
-	# 	post_id = row.id
+	#  	post_id = row.id
+	#  	prev_like = model.Comment.check_like(True, user_id, post_id)
 	# 	comments = model.Post.get_comments(row, post_id)
 	# 	num_likes = model.Post.num_likes(row, post_id)
 	# 	num_comments = model.Post.num_comments(row, post_id)
 	return render_template("display_collection.html", rows=rows)
+	#return render_template("display_collection.html", rows=rows, prev_like=prev_like)
 	#return render_template("display_collection.html", rows=rows, comments=comments)
 	#return render_template("display_collection.html", rows=rows, num_likes=num_likes, num_comments=num_comments)
 
@@ -178,21 +180,17 @@ def get_audio(id):
 #-------------------------Adding comments----------------------------
 @app.route("/add_like/<int:post_id>", methods=['POST'])
 def add_like(post_id):
-	posted_at = datetime.datetime.now()
-	user_id = session.get("user_id", None)
-	prev_like = model.Comment.check_like(1, user_id, post_id)
-	if not prev_like:
-		model.Comment.new_like(1, None, None, posted_at, user_id, post_id)
-		return redirect(url_for("display_collection"))
+	post = model.Post.get(post_id)
+	post.like = True
+	model.session.commit()
+	return redirect(url_for("display_collection"))
 
 @app.route("/add_text_comment/<int:post_id>", methods=['POST'])
 def text_comment(post_id):
-	print post_id
 	text = request.form['text_comment']
 	posted_at = datetime.datetime.now()
 	user_id = session.get("user_id", None)
-	print user_id
-	model.Comment.new_comment(0, None, text, posted_at, user_id, post_id)
+	model.Comment.new_comment(False, None, text, posted_at, user_id, post_id)
 	return redirect(url_for("display_collection"))
 
 #-------------------------Deleting stuffs----------------------------

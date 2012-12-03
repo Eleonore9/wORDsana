@@ -32,11 +32,7 @@
 
 <div class="background2">
 
-<h2>User 's collection of words</h2>
-
-
-
-<h3> Step 3: enjoy your collection! </h3>
+<h1> Step 3: enjoy your collection! </h1>
 
 </div> 
 <div class="low_backgrd">
@@ -56,10 +52,15 @@
 			{# should be able to edit the posts #}
 
 			{# Add Like #}
-			<form method='POST' action="/add_like/{{row.id}}">
-				<input type="submit" value="Like" class="btn btn-success"></input>
-			</form>
-
+				{% if row.like == True %}	
+					<div class="btn_like">
+						<form method='POST' action="/add_like/{{row.id}}">
+							<input type="submit" value="Like" class="btn btn-success"></input>
+						</form>
+					</div>
+				{% else %}
+						<div class="btn">Liked</div>
+				{% endif %}	
 
 			{# Count Likes #}
 			{# {{num_likes}} Likes #}
@@ -72,7 +73,7 @@
 
 			{#  Display text_comments added #}
 			<ul>
-				{% for comment in row.comments %}					
+				{% for comment in row.comments %}				
 					<li>commented {{comment.posted_at | pretty_date}} : <strong>{{comment.text}}</strong></li>
 				{% endfor %}
 			</ul>
