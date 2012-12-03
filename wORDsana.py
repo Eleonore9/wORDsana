@@ -180,8 +180,10 @@ def get_audio(id):
 def add_like(post_id):
 	posted_at = datetime.datetime.now()
 	user_id = session.get("user_id", None)
-	model.Comment.new_like(1, None, None, posted_at, post_id, user_id)
-	return redirect(url_for("display_collection"))
+	prev_like = model.Comment.check_like(1, user_id, post_id)
+	if not prev_like:
+		model.Comment.new_like(1, None, None, posted_at, user_id, post_id)
+		return redirect(url_for("display_collection"))
 
 @app.route("/add_text_comment/<int:post_id>", methods=['POST'])
 def text_comment(post_id):
@@ -228,13 +230,13 @@ def logout():
 def pretty_date_filter(d):
 	return pretty.date(d)
 
+#--------------------------------------------------------------------
+
 
 if __name__ == "__main__":
     app.run(debug=True, host="0.0.0.0", port=5000)
 
 	# app.run(debug=True, host="0.0.0.0")
-
-
 
 
 #------------example of badly written function----------------

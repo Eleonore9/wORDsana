@@ -201,17 +201,17 @@ class Comment(Base):
 	@classmethod
 	def new_like(cls, like, sound, text, posted_at, user_id, post_id):
 		""" a "like" is a comment without sound or text """
-		prev_like = session.query(Comment).filter_by(like=1, user_id=user_id, post_id=post_id).first()
-		print 1
-		if prev_like :
-			print 2
-			now = datetime.datetime.now()
-			like = Comment(1, None, None, now, user_id, post_id)
-			session.add(like)
-			session.commit()
-			print 3
-			return like
+		now = datetime.datetime.now()
+		like = Comment(1, None, None, now, user_id, post_id)
+		session.add(like)
+		session.commit()
+		return like
 		
+	@classmethod
+	def check_like(cls, like, user_id, post_id):
+		prev_like = session.query(Comment).filter_by(like=1, user_id=user_id, post_id=post_id).first()
+		return prev_like
+
 	@classmethod
 	def new_comment(cls, like, sound, text, posted_at, user_id, post_id):
 		""" a "comment" has text and can have sound """
