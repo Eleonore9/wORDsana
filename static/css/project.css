@@ -1,4 +1,4 @@
-
+/*   TEXT ELEMENTS   */
 h1 {
 	font-family: 'Merienda', cursive;
 	/*margin-left:500px;*/
@@ -26,6 +26,8 @@ a {
 	color:white;
 }
 
+
+/*   BACKGROUND IMAGES   */
 .background {
 	border-bottom:1px solid grey;
 	background-image: url(/static/img/nasty_fabric.png);
@@ -45,11 +47,21 @@ a {
 	width: 100%;
 }
 
+.low_backgrd {
+	background-image: url(/static/img/cream_dust.png);
+	position:absolute;
+	margin-top: auto;
+	height:1000px;
+	width: 100%;
+}
+
 .container {
 	width:auto;
 	height:auto;
 }
 
+
+/*  IN THE HEADER  */
 header {
 	color:#195AAA;
 }
@@ -117,18 +129,15 @@ header .container {
 	margin-top:auto;
 }
 */
-.low_backgrd {
-	background-image: url(/static/img/cream_dust.png);
-	position:absolute;
-	margin-top: auto;
-	height:1000px;
-	width: 100%;
-}
+
 /*.text-info {
 
 	padding-top:20px;
 }*/
 
+
+
+/*  FORMS AND FORMS BUTTONS  */
 .form_login {
 	border:1px solid grey;
 	box-shadow: 5px 5px 15px 5px;
@@ -226,6 +235,39 @@ ul {
 
 }*/
 
-.sound_player {
-	border:1px solid purple;
+
+/*  POSTS AND COMMENTS/LIKES  */
+.post_comments {
+	border:1px solid grey;
+	width: 500px;
+	border-radius: 5px 5px;
+	box-shadow: 1px 1px 5px 1px;
+	margin-left: 5px;
+	margin-top: 7px;
+	padding-left: 20px;
+	padding-top: 20px;
+}
+
+.post_text {
+
+}
+
+.audio_player {
+
+}
+
+.post_like {
+
+}
+
+.nb_comments {
+
+}
+
+.text_comments {
+
+}
+
+.delete_comment {
+
 }
