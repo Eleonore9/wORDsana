@@ -1,5 +1,5 @@
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy import create_engine, ForeignKey
+from sqlalchemy import create_engine, ForeignKey, delete
 from sqlalchemy import Column, Integer, String, DateTime, Boolean
 import datetime
 from sqlalchemy.orm import sessionmaker, relationship, backref, scoped_session
@@ -128,17 +128,10 @@ class Post(Base):
 		return posts
 
 	#--------instance methods------------------
-	def get_id(self, sound, text, posted_at, user_id):
-		pass
-
 	def add_sound(self, post_id, sound_url):
 		post = session.query(Post).get(post_id)
 		post.sound = sound_url
 		session.commit()
-
-	# def get_comments(self, post_id, user_id):
-	# 	comments = session.query(Comment).filter_by(post_id=post_id, user_id=user_id).all()
-	# 	return comments
 
 	def get_comments(self, post_id):
 		comments = session.query(Comment).filter_by(post_id=post_id).all()
@@ -183,11 +176,6 @@ class Comment(Base):
 		self.post_id = post_id
 
 	#--------class methods--------------------	
-	# @classmethod
-	# def check_like(cls, like, user_id, post_id):
-	# 	prev_like = session.query(Comment).filter_by(like=True, user_id=user_id, post_id=post_id).first()
-	# 	return prev_like
-
 	@classmethod
 	def new_comment(cls, sound, text, posted_at, user_id, post_id):
 		""" a "comment" has text and can have sound """
@@ -199,12 +187,16 @@ class Comment(Base):
 
 	@classmethod
 	def get(cls, id):
-		pass
-		return get_thing()
+		"""get Comment using its id """
+		comment = session.query(Comment).get(id)
+		return comment
 
 	#--------instance methods------------------
-	def get_id(self, sound, text, posted_at, user_id, post_id):
-		pass
+	def delete_comment(self, id):
+		del_comment = session.query(Comment).filter_by(id=id).first()
+		session.delete(del_comment)
+		session.commit()
+
 
 	# def get_comments(self, post_id, user_id):
 	# 	comments = session.query(Comment).filter_by(post_id=post_id, user_id=user_id).all()
