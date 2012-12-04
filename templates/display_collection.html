@@ -32,14 +32,14 @@
 
 <div class="background2">
 
-<h1> Step 3: enjoy your collection! </h1>
+<h1> Enjoy your collection! </h1>
 
 </div> 
 <div class="low_backgrd">
 
 	{% for row in rows %}
-	<div>
-		<div class="sound_player"></div>
+	
+	<div class="sound_player">
 
 		<strong>{{ row.text }}</strong>, posted {{ row.posted_at | pretty_date}}
 
@@ -52,7 +52,7 @@
 			{# should be able to edit the posts #}
 
 			{# Add Like #}
-				{% if row.like == True %}	
+				{% if row.like == False %}	
 					<div class="btn_like">
 						<form method='POST' action="/add_like/{{row.id}}">
 							<input type="submit" value="Like" class="btn btn-success"></input>
@@ -62,8 +62,23 @@
 						<div class="btn">Liked</div>
 				{% endif %}	
 
-			{# Count Likes #}
-			{# {{num_likes}} Likes #}
+
+			{# Count Comments #}
+			{{ row.comments | length}} Comments
+
+			{#  Display text_comments added #}
+				
+				{% for comment in row.comments %}
+					
+				<ul>				
+					<li>commented {{comment.posted_at | pretty_date}} : <strong>{{comment.text}}</strong></li>
+				</ul>
+					{# Delete text Comment #}
+					<form method='POST' action="{{url_for("delete_comment", com_id=comment.id)}}">
+						<input type="submit" value="Delete comment" class="btn"></input>
+					</form>
+				{% endfor %}
+				
 
 			{# Add text Comment #}
 			<form method='POST' action="/add_text_comment/{{row.id}}">
@@ -71,23 +86,8 @@
 				<input type="submit" value="Comment" class="btn btn-inverse"></input>
 			</form>
 
-			{#  Display text_comments added #}
-			<ul>
-				{% for comment in row.comments %}				
-					<li>commented {{comment.posted_at | pretty_date}} : <strong>{{comment.text}}</strong></li>
-				{% endfor %}
-			</ul>
-
-			{# Count Comments #}
-			{# {{num_comments}} Comments #}
-
-			{# Delete text Comment 
-			<form method='POST' action="{{url_for("delete_comment", post_id=row.id)}}">
-				<input type="submit" value="Delete comment" class="btn"></input>
-			</form> #}
-
 		
-		</div>
+	</div>
 	{% endfor %}
 
 	<div class="new_sound_btn">
