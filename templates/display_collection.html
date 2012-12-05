@@ -34,52 +34,63 @@
 
 <h1> Enjoy your collection! </h1>
 
+	<div class="new_sound_btn">
+		<a class="btn btn-large btn-inverse" href="{{url_for("enter_text")}}"> Create a new sound! </a>
+	</div>
+
 </div> 
-<div class="low_backgrd">
+<div class="low_backgrd2">
 
 	{% for row in rows %}
 	
-	<div class="sound_player">
+	<div class="post_comments">
+		
+			<div class="post_text">
+			<strong>{{ row.text }}</strong>, posted {{ row.posted_at | pretty_date}}
+			</div>
+				{# Sound player #}
+				{# use the audio tag! It works in Chrome (but pb in FF)#}
+			<div class="audio_player">	
+				<audio controls="controls" width="142" height="70" >
+				 <source src="/get_audio/{{ row.id }}" type="audio/wav">
+				</audio>
+			</div>
 
-		<strong>{{ row.text }}</strong>, posted {{ row.posted_at | pretty_date}}
-
-			{# Sound player #}
-			{# use the audio tag! It works in Chrome (but pb in FF)#}
-			<audio controls="controls" width="142" height="70" >
-			 <source src="/get_audio/{{ row.id }}" type="audio/wav">
-			</audio>
-
-			{# should be able to edit the posts #}
-
-			{# Add Like #}
-				{% if row.like == False %}	
-					<div class="btn_like">
-						<form method='POST' action="/add_like/{{row.id}}">
-							<input type="submit" value="Like" class="btn btn-success"></input>
+				{# should be able to edit the posts #}
+				
+			<div class="post_like">
+				{# Add Like #}
+					{% if row.like == False %}	
+						<div class="btn_like">
+							<form method='POST' action="/add_like/{{row.id}}">
+								<input type="submit" value="Like" class="btn btn-success"></input>
+							</form>
+						</div>
+					{% else %}
+							<div class="btn">Liked</div>
+					{% endif %}	
+			</div>
+		
+				{# Count Comments #}
+			<div class="nb_comments">
+				{{ row.comments | length}} Comments
+			</div>
+				{#  Display text_comments added #}
+			
+					{% for comment in row.comments %}
+			<div class="text_comments">
+					<ul>				
+						<li>commented {{comment.posted_at | pretty_date}} : <strong>{{comment.text}}</strong></li>
+					</ul>
+			</div>
+						{# Delete text Comment #}
+			<div class="delete_comment">
+						<form method='POST' action="{{url_for("delete_comment", com_id=comment.id)}}">
+							<input type="submit" value="Delete comment" class="btn btn-small"></input>
 						</form>
-					</div>
-				{% else %}
-						<div class="btn">Liked</div>
-				{% endif %}	
-
-
-			{# Count Comments #}
-			{{ row.comments | length}} Comments
-
-			{#  Display text_comments added #}
+			</div>
+					{% endfor %}
 				
-				{% for comment in row.comments %}
-					
-				<ul>				
-					<li>commented {{comment.posted_at | pretty_date}} : <strong>{{comment.text}}</strong></li>
-				</ul>
-					{# Delete text Comment #}
-					<form method='POST' action="{{url_for("delete_comment", com_id=comment.id)}}">
-						<input type="submit" value="Delete comment" class="btn"></input>
-					</form>
-				{% endfor %}
-				
-
 			{# Add text Comment #}
 			<form method='POST' action="/add_text_comment/{{row.id}}">
 				<textarea rows="2" name="text_comment" placeholder="Add a comment"></textarea>
@@ -90,9 +101,7 @@
 	</div>
 	{% endfor %}
 
-	<div class="new_sound_btn">
-	<a class="btn btn-large btn-inverse" href="{{url_for("enter_text")}}"> Create a new sound! </a>
-	</div>
+	
 </div>
 <!-- </div> -->
 

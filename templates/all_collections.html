@@ -29,12 +29,17 @@
 
 	<h1>All sound collections on wORDsana</h1>
 
+{% if user_id %}
+			<a class="btn btn-large btn-inverse" href="{{url_for("display_collection")}}"> Back to your collection </a>
+	{% endif %}
+
 </div> 
-<div class="low_backgrd">
+<div class="low_backgrd2">
 
 {% for post in posts %}
 
-	<div class="sound_player">
+	<div class="post_comments">
+		
 		<strong>{{ post.text }}</strong>, posted on {{ post.posted_at | pretty_date}}
 		{# Sound player #}
 		{# use the audio tag! It works in Chrome (but pb in FF)#}
@@ -75,11 +80,6 @@
 
 {% endfor %}
 	
-	{% if user_id %}
-		
-			<a class="btn btn-large btn-inverse" href="{{url_for("display_collection")}}"> Back to your collection </a>
-		
-	{% endif %}
 
 </div>
 <!-- </div> -->

@@ -52,11 +52,7 @@ class User(Base):
 		return check
 
 	#--------instance methods------------------
-	# def get_id(self, email, password, username):
-	# 	"""retrieves the id of a particular user"""
-	# 	user_id = session.query(User).filter_by(email=email, password=password, username=username)
-	# 	return user_id
-
+	
 	def get_posts(self, user_id):
 		row_collection = session.query(Post).filter_by(user_id=user_id).order_by(Post.id.desc()).all()
 		return row_collection
@@ -65,21 +61,7 @@ class User(Base):
 		"""get Post using its id """
 		post = session.query(Post).get(id)
 		return post
-	# def get_posts_ids(self, user_id):
-	# 	row_collection = session.query(Post).filter_by(user_id=user_id).all()
-	# 	sound_collection = []
-	# 	for row in row_collection:
-	# 		sound_id = row.id
-	# 		sound_collection.append(sound_id)
-	# 	return sound_collection
-
-	# def get_posts_texts(self, user_id):
-	# 	row_collection = session.query(Post).filter_by(user_id=user_id).all()
-	# 	sound_collection = []
-	# 	for row in row_collection:
-	# 		sound_id = row.text
-	# 		sound_collection.append(sound_id)
-	# 	return sound_collection
+	
 
 	def change_password(self, id, new_password):
 		user = session.query(User).get(id)
@@ -124,8 +106,9 @@ class Post(Base):
 
 	@classmethod
 	def all(cls):
-		posts = session.query(Post).all()
+		posts = session.query(Post).order_by(Post.id.desc()).all()
 		return posts
+		
 
 	#--------instance methods------------------
 	def add_sound(self, post_id, sound_url):
@@ -136,20 +119,6 @@ class Post(Base):
 	def get_comments(self, post_id):
 		comments = session.query(Comment).filter_by(post_id=post_id).all()
 		return comments
-
-	def num_likes(self, post_id):
-		pass
-		# likes = session.query(Comment).filter_by(post_id=post_id, text==None).all()
-		# # all_comments = session.query(func.count(Comment.id))
-		# # comments = session.query(func.count(Comment.text))
-		# # likes = all_comments - comments
-		# return likes
-
-	def num_comments(self, post_id):
-		pass
-		# comments = session.query(Comment).filter_by(post_id=post_id, text!=None).all()
-		# # comments = session.query(func.count(Comment.text))
-		# return comments
 
 #-------------------Comment Class----------------------------------
 class Comment(Base):
@@ -196,11 +165,6 @@ class Comment(Base):
 		del_comment = session.query(Comment).filter_by(id=id).first()
 		session.delete(del_comment)
 		session.commit()
-
-
-	# def get_comments(self, post_id, user_id):
-	# 	comments = session.query(Comment).filter_by(post_id=post_id, user_id=user_id).all()
-	# 	return comments
 
 
 #End of Classes definition

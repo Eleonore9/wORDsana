@@ -32,7 +32,7 @@ a {
 	border-bottom:1px solid grey;
 	background-image: url(/static/img/nasty_fabric.png);
 	position:relative;
-	height:500px;
+	height:600px;
 	padding:50px;
 	width: 100%;
 }
@@ -42,7 +42,7 @@ a {
 	background-image: url(/static/img/nasty_fabric.png);
 	position:relative;
 	margin-top: 10px;
-	height:300px;
+	height:250px;
 	padding:50px;
 	width: 100%;
 }
@@ -53,6 +53,16 @@ a {
 	margin-top: auto;
 	height:1000px;
 	width: 100%;
+}
+
+.low_backgrd2 {
+	background-color:#D9D9F7;
+	height: 1000px;
+}
+
+.collection_btn {
+	margin-top:40px;
+	margin-left:900px;
 }
 
 .container {
@@ -84,7 +94,7 @@ header .container {
 }
 
 .navbar-fixed-top .navbar-inner {
-	background-image:url(/static/img/gplaypattern.png);;
+	background-image:url(/static/img/gplaypattern.png);
 	height: 70px;
 }
 /*.navbar-fixed-top .nav li {
@@ -197,11 +207,11 @@ header .container {
 }
 
 .signup_btn {
-	margin-left:930px;
-	margin-right:auto;
+	margin-left:auto;
+	margin-right:100px;
 	margin-top:auto;
 	padding-top:30px;
-	position:absolute;
+	text-align: right;
 }
 
 /*.recorder {
@@ -239,25 +249,31 @@ ul {
 /*  POSTS AND COMMENTS/LIKES  */
 .post_comments {
 	border:1px solid grey;
-	width: 500px;
+	width: 550px;
 	border-radius: 5px 5px;
 	box-shadow: 1px 1px 5px 1px;
-	margin-left: 5px;
-	margin-top: 7px;
+	margin-left: 40px;
+	/*margin-bottom: 5px;*/
+	margin-right: 10px;
+	margin-top: 10px;
 	padding-left: 20px;
 	padding-top: 20px;
+	float:left;
+	background-image: url(/static/img/cream_dust.png);
 }
 
 .post_text {
-
+	margin-bottom: 5px;
+	font-size: 1.1em;
+	
 }
 
 .audio_player {
-
+	
 }
 
 .post_like {
-
+	
 }
 
 .nb_comments {

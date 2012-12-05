@@ -10,9 +10,9 @@ import pretty
 app = Flask(__name__)
 app.secret_key = 'je_peux_pas_le_dire_c_est_un_secret'
 
-@app.teardown_request
-def teardown_request(exc):
-	model.session.close()
+# @app.teardown_request
+# def teardown_request(exc):
+# 	model.session.close()
 
 #---------------To login and access the app--------------------------
 @app.route("/")
@@ -116,16 +116,8 @@ def display_collection():
 	user_id = session.get("user_id", None)
 	user = model.User.get(user_id)
 	rows = model.User.get_posts(user, user_id)
-	# for row in rows:
-	#  	post_id = row.id
-	#  	prev_like = model.Comment.check_like(True, user_id, post_id)
-	# 	comments = model.Post.get_comments(row, post_id)
-	# 	num_likes = model.Post.num_likes(row, post_id)
-	# 	num_comments = model.Post.num_comments(row, post_id)
 	return render_template("display_collection.html", rows=rows)
-	#return render_template("display_collection.html", rows=rows, prev_like=prev_like)
-	#return render_template("display_collection.html", rows=rows, comments=comments)
-	#return render_template("display_collection.html", rows=rows, num_likes=num_likes, num_comments=num_comments)
+	
 
 #-------------------------User Settingss-------------------------------
 @app.route("/settings")
@@ -149,10 +141,10 @@ def save_new_password():
 @app.route("/all_collections")
 def all_collections():
 	all_posts = model.Post.all()
-	return render_template("all_collections.html", posts=all_posts)
+	user_id = session.get("user_id", None)
+	return render_template("all_collections.html", posts=all_posts, user_id=user_id)
 
-#--------------------------Saving audio -----------------------------
-
+#--------------------------Saving audio --------------------------------
 @app.route("/crossdomain.xml")
 def crossdomain():
 	return """\
@@ -177,7 +169,7 @@ def get_audio(id):
 	return send_from_directory("static/upload/", "recording_%d.wav" % 
 		id)
 
-#-------------------------Adding comments----------------------------
+#-------------------------Adding like or comments----------------------------
 @app.route("/add_like/<int:post_id>", methods=['POST'])
 def add_like(post_id):
 	post = model.Post.get(post_id)
@@ -190,7 +182,7 @@ def text_comment(post_id):
 	text = request.form['text_comment']
 	posted_at = datetime.datetime.now()
 	user_id = session.get("user_id", None)
-	model.Comment.new_comment(False, None, text, posted_at, user_id, post_id)
+	model.Comment.new_comment(None, text, posted_at, user_id, post_id)
 	return redirect(url_for("display_collection"))
 
 #-------------------------Deleting stuffs----------------------------
@@ -208,10 +200,10 @@ def delete_text(post_id):
 	flash('Your text was deleted')
 	return redirect(url_for("display_collection"))
 
-@app.route("/delete_comment/<int:post_id>", methods=['POST'])
-def delete_comment(post_id):
-	post = model.Post.get(post_id)
-	model.Post.delete_comment(post, post_id)
+@app.route("/delete_comment/<int:com_id>", methods=['POST'])
+def delete_comment(com_id):
+	comment = model.Comment.get(com_id)
+	model.Comment.delete_comment(comment, com_id)
 	flash('Your comment was deleted')
 	return redirect(url_for("display_collection"))
 
@@ -234,29 +226,3 @@ def pretty_date_filter(d):
 if __name__ == "__main__":
     app.run(debug=True, host="0.0.0.0", port=5000)
 
-	# app.run(debug=True, host="0.0.0.0")
-
-
-#------------example of badly written function----------------
-# def new_user():
-# 	email = request.form['email']
-# 	password = request.form['password1']
-# 	username = request.form['username']
-# 	if model.User.authenticate(email, password) == None:
-# 		if len(password) >= 5 and request.form['password1'] == request.form['password2']:
-# 			if model.User.check_name(username) == None:
-# 				new_user = model.User.new(email, password, username)
-# 				if new_user != None:
-# 					session['user_id'] = new_user.id
-# 					return redirect(url_for("view_userpage"))
-# 				return redirect(url_for("index"))
-# 			else:
-# 				flash("This username is already used. Please choose another one!")
-# 				return redirect(url_for("sign_up"))			
-# 		else:
-# 			flash("Please retype your password")
-# 			return redirect(url_for("sign_up"))		
-# 	else:
-# 		flash("You already have an account!")
-# 		flash("Please, log in below with your email and password.")
-# 		return redirect(url_for("index"))
