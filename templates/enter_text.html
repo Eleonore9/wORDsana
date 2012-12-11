@@ -30,25 +30,28 @@
 
 
 
-<div class="background2">
+<div class="page_body">
 
 
 <h1> Step 1: write a post </h1>
 
+<h4>Enter a text to label your audio post</h4>
 <div class="form_text">
 	<form class="span5" method="POST" action="{{url_for("save_text")}}">
 		<!-- <input type="textarea" name="text" placeholder="write something here"></input> -->
 		<textarea rows="2" name ="text" placeholder="write something here"></textarea>
-		<input type="submit" value="Add to collection" class="btn btn-inverse"></input>
+		<input type="submit" value="Save text" class="btn"></input>
 	</form>
 </div>
-</div>
 
-<div class="low_backgrd">
+<div class="view_collection">
+<h4>Or view your collection </h4>
+<!-- <div class="low_backgrd"> -->
 	<div class="collection_btn">
 	<a class="btn btn-large btn-inverse" href="{{url_for("display_collection")}}"> View collection </a>
 	</div>
-</div>
 <!-- </div> -->
-
+<!-- </div> -->
+</div>
+</div>
 {% endblock %}

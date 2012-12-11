@@ -17,7 +17,14 @@ app.secret_key = 'je_peux_pas_le_dire_c_est_un_secret'
 #---------------To login and access the app--------------------------
 @app.route("/")
 def index():
-    return render_template("login.html")
+	all_posts = model.Post.all()
+	user_id = session.get("user_id", None)
+	return render_template("index_view.html", posts=all_posts, user_id=user_id)
+    
+
+@app.route("/log_in")
+def log_in():
+	return render_template("login.html")
 
 @app.route("/authenticate", methods=['POST'])
 def authenticate():

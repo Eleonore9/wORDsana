@@ -1,5 +1,6 @@
 {% extends "layout.html" %}
 {% block body %}
+
 <header>
 <div class="navbar-fixed-top">
 	<div class= "navbar-inner">
@@ -14,8 +15,11 @@
 			</div>
     	<nav>
     		<ul id="nav" class="nav">
+				<li class="collection"><a href="{{url_for("all_collections")}}">All collections</a>
+				</li>
+				<!-- <li class="vertical-divider"></li> -->
 				<li class="nav_right"><a href="{{url_for("about")}}">About</a>
-				</div></li>
+				</li>
 			</ul>
 		</nav>
 		</div>
@@ -23,10 +27,29 @@
 </div>
 </header>
 
-
 <div class="page_body">
+	<!-- <div class="container-fluid"> -->
+		
+			<div class="background">
 
+			<h1>Welcome to wORDsana !</h1>
+				<br>
+				
+				<h3>Log in, record yourself and listen to other people's collections!</h3>
 
+				<div class="row-fluid">
+					<div class="span4">
+				<div class="login_btn">
+					<a class="btn btn-large btn-info" href="{{url_for("log_in")}}"> Log in </a>
+				</div></div>
+					<div class="span4 offset4">
+				<div class="signup_btn">
+					<a class="btn btn-large btn-inverse" href="{{url_for("sign_up")}}"> Sign Up </a>
+				</div></div>
+				</div>
+			</div>
+	<!-- </div> -->
+	
 	<div class="title_collections">
 	<h1>All sound collections on wORDsana</h1>
 	</div>
@@ -36,7 +59,6 @@
 	{% endif %}
 
 
-<!-- <div class="low_backgrd2"> -->
 
 {% for post in posts %}
 
@@ -81,9 +103,8 @@
 	</div>
 
 {% endfor %}
-</div>
 
-<!-- </div> -->
-<!-- </div> -->
+	
+</div>
 
 {% endblock %}

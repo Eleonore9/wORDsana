@@ -25,25 +25,29 @@
     </div>
 </div>
 </header>
+<div class="page_body">
+    <div class="container-fluid">
 
+       <!--  <div class="background"> -->
+        <h1>Get started with wORDsana!</h1>
+        <h3>Sign up NOW!</h3>
 
-<div class="background">
-<h1>Get started with wORDsana!</h1>
-<h3>Sign up NOW!</h3>
-
-<div class="form_signup">
-        <form method="POST" action="{{ url_for("new_user")}}">
-        	<label><strong>username</strong></label>
-        	<input type="text" name="username" placeholder="Choose a username"></input>
-        	<label><strong>email</strong></label>
-        	<input type="text" name="email" placeholder="Enter your email address"></input>
-        	<label><strong>password</strong> (5 characters minimum)</label> 
-        	<input type="password" name="password1" placeholder="Choose a password"></input>
-        	<input type="password" name="password2" placeholder="Please, retype your password"></input>
-        	<input type="submit" value="Sign Up" class="btn"></input>
-        </form>
+        <div class="form_signup">
+                <form method="POST" action="{{ url_for("new_user")}}">
+                	<label><strong>username</strong></label>
+                	<input type="text" name="username" placeholder="Choose a username"></input>
+                	<label><strong>email</strong></label>
+                	<input type="text" name="email" placeholder="Enter your email address"></input>
+                	<label><strong>password</strong> (5 characters minimum)</label> 
+                	<input type="password" name="password1" placeholder="Choose a password"></input>
+                	<input type="password" name="password2" placeholder="Please, retype your password"></input>
+                	<input type="submit" value="Sign Up" class="btn"></input>
+                </form>
+        </div>
+        <!-- </div> -->
+    </div>
 </div>
-</div>
+
 <div class="low_backgrd">
 </div>
 

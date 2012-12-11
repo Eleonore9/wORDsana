@@ -26,29 +26,34 @@
 	</div>
 </div>
 </header>
+<div class="page_body">
+	<div class="container-fluid">
 
-<div class="background">
-	<!-- <div class="body_page">  -->
-<div class="signup_btn">
-	<a class="btn btn-large btn-inverse" href="{{url_for("sign_up")}}"> Sign Up </a>
-</div>
-	
-<h1>Willkommen, Bienvenue, Welcome!</h1>  
+		<!-- <div class="background"> -->
+		
+			<!-- <div class="body_page">  -->
+		<!-- <div class="signup_btn">
+			<a class="btn btn-large btn-inverse" href="{{url_for("sign_up")}}"> Sign Up </a>
+		</div> -->
+			
+		<h1>Willkommen, Bienvenue, Welcome!</h1>  
 
-<div class="form_login">
-        <form method="POST" action="{{ url_for("authenticate")}} ">
-        	<label> email </label>
-        	<input type="text" name="email" placeholder="enter your email here"></input>
-        	<label> password </label>
-        	<input type="password" name="password" placeholder="enter your password here"></input>
-        	<input type="submit" value="Log in" class="btn"></input>
-        </form>
-</div>
+		<div class="form_login">
+		        <form method="POST" action="{{ url_for("authenticate")}} ">
+		        	<label> email </label>
+		        	<input type="text" name="email" placeholder="enter your email here"></input>
+		        	<label> password </label>
+		        	<input type="password" name="password" placeholder="enter your password here"></input>
+		        	<input type="submit" value="Log in" class="btn"></input>
+		        </form>
+		</div>
+		<!-- </div> -->
+	</div>
 </div>
 
-<div class="low_backgrd">
+<!-- <div class="low_backgrd">
 
-</div>
+</div> -->
 	<!-- </div> -->
 
 {% endblock %}
